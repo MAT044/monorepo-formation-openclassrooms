@@ -5,7 +5,7 @@
                 foreach($oeuvres as $oeuvre):
             ?>
                 <article class="oeuvre">
-                    <a href="oeuvre-<?= $oeuvre['id'] ?>.php">
+                    <a href="oeuvre.php?id=<?= $oeuvre['id'] ?>">
                         <img src="img/<?= $oeuvre['img'] ?>" alt="<?= $oeuvre['title'] ?>">
                         <h2><?= $oeuvre['title'] ?></h2>
                         <p class="description"><?= $oeuvre['artist'] ?></p>
