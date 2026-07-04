@@ -6,7 +6,7 @@
             'title' => '404',
             'artist' => 'Not found',
             'description' => 'L\'id de l\'oeuvre ne correspond à aucune oeuvre dans notre base de donnée.',
-            'img' => 'clark-van-der-beken.png'
+            'img' => 'logo.png'
         ];
     ?>
     <article id="detail-oeuvre">
