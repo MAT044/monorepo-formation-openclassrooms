@@ -122,7 +122,43 @@ a {
 }
 
 
+/* Header */
 
+.header {
+    display: flex;
+}
+
+.logo {
+    padding: 30px 50px;
+    box-sizing: border-box;
+    max-height: 79px;
+}
+
+/* Navigation */
+
+.menu {
+    flex: 1;
+}
+
+.menu ul {
+    list-style: none;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    margin: 0;
+    margin-top: 2px;
+}
+
+.menu-item a {
+    padding: 8px 16px;
+    border: 2px solid transparent;
+    transition: border-top-color 1s, color 1s;
+    box-sizing: border-box;
+}
+.menu-item:hover a {
+    color: var(--main-color);
+    border-top-color: var(--main-color) ;
+}
 
 /* Le code ci-dessous correspond à la version responsive uniquement */
 
