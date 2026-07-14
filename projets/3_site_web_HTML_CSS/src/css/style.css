@@ -7,6 +7,7 @@
     --main-color: #0065FC;
     --main-bg-color: #F2F2F2;
     --filter-bg-color: #DEEBFF;
+    --filter-color: #D9D9D9;
 }
 
 .fa-solid {
@@ -199,6 +200,30 @@ a {
     background-color: var(--main-color);
     border: 1px solid var(--main-color);
     border-radius: 0px 15px 15px 0px;
+}
+
+/* Filter bar */
+
+.filter-bar {
+    display: flex;
+    gap: 15px;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.filter-btn, .filter-label {
+    padding: 12px 18px;
+    box-sizing: border-box;
+}
+
+.filter-btn {
+    border: 2px solid var(--filter-color);
+    border-radius: 25px;
+}
+
+.filter-btn:hover {
+    background-color: var(--filter-bg-color);
 }
 
 /* Le code ci-dessous correspond à la version responsive uniquement */
