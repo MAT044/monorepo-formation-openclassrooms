@@ -224,6 +224,33 @@ a {
     max-height: 79px;
 }
 
+/* Footer */
+.footer {
+    display: flex;
+    background-color: var(--main-bg-color);
+    padding: 30px;
+}
+
+.footer-title {
+    margin-top: 0;
+}
+
+.footer-menu {
+    flex: 1;
+    max-width: 33%;
+
+}
+
+.footer-menu ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer-menu li {
+    margin-bottom: 15px;
+}
+
+
 /* Navigation */
 
 .menu {
