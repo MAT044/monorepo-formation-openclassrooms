@@ -160,6 +160,56 @@ a {
     border-top-color: var(--main-color) ;
 }
 
+/* Headline */
+
+.headline {
+    margin-bottom: 30px;
+}
+
+/* Search bar */
+
+.search-bar {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.search-label, .search-input {
+    border: 1px solid var(--main-bg-color);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.search-label {
+    background-color: var(--main-bg-color);
+    display: block;
+    border-left: none;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    padding: 15px;
+}
+
+.search-label > .fa-solid {
+    color: black;
+}
+
+.search-input {
+    border: 1px solid var(--main-bg-color);
+    border-left: none;
+    border-right: none;
+    padding: 15px;
+}
+
+.search-btn {
+    color: var(--main-bg-color);
+    background-color: var(--main-color);
+    border: 1px solid var(--main-color);
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
 /* Le code ci-dessous correspond à la version responsive uniquement */
 
 /****** Media queries ***********/
