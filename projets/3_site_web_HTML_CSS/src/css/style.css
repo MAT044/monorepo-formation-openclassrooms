@@ -173,19 +173,16 @@ a {
     margin-bottom: 30px;
 }
 
-.search-label, .search-input {
-    border: 1px solid var(--main-bg-color);
+.search-bar > * {
+    padding: 15px;
     font-size: 18px;
     font-weight: 700;
+    border: 1px solid var(--main-bg-color);
 }
 
 .search-label {
     background-color: var(--main-bg-color);
-    display: block;
-    border-left: none;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-    padding: 15px;
+    border-radius: 15px 0px 0px 15px ;
 }
 
 .search-label > .fa-solid {
@@ -193,21 +190,15 @@ a {
 }
 
 .search-input {
-    border: 1px solid var(--main-bg-color);
     border-left: none;
     border-right: none;
-    padding: 15px;
 }
 
 .search-btn {
     color: var(--main-bg-color);
     background-color: var(--main-color);
     border: 1px solid var(--main-color);
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-    padding: 15px;
-    font-size: 18px;
-    font-weight: 700;
+    border-radius: 0px 15px 15px 0px;
 }
 
 /* Le code ci-dessous correspond à la version responsive uniquement */
