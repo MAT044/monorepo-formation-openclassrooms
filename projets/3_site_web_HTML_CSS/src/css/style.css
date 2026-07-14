@@ -105,6 +105,22 @@ a {
     box-sizing: border-box;
 }
 
+.hebergements-cards .card-title {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.hebergements-cards .card-subtitle {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.hebergements-cards .card-rating {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+
 /****** Populaires ***********/
 .populaires {
     width: 32%;
@@ -137,17 +153,17 @@ a {
     box-sizing: border-box;
 }
 
-.hebergements-cards .card-title, .populaires-cards .card-title {
+.populaires-cards .card-title {
     margin-top: 10px;
     margin-bottom: 4px;
 }
 
-.hebergements-cards .card-subtitle, .populaires-cards .card-subtitle {
+.populaires-cards .card-subtitle {
     margin: 0;
     margin-bottom: 4px;
 }
 
-.hebergements-cards .card-rating, .populaires-cards .card-rating {
+.populaires-cards .card-rating {
     margin-bottom: 5px;
 }
 
