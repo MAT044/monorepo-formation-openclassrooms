@@ -184,11 +184,13 @@ a {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 33px;
+    align-items: stretch;
 }
 
 .activites-cards .card {
     margin-top: 33px;
     padding: 0;
+    
 }
 
 .activites-cards img {
@@ -358,6 +360,10 @@ a {
 /****** Media queries ***********/
 /* Medium devices (tablets, less/equal than 1024px) */
 @media (max-width: 1024px) {
+    .main-container {
+        max-width: 1024px;
+    }
+
     .hebergements-and-populaires {
         flex-direction: column;
     }
