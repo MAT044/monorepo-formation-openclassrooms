@@ -20,8 +20,8 @@
             <img src="./images/logo/Booki.png" height=19 width=61 class="logo" alt="Booki">
             <nav class="menu">
                 <ul>
-                    <li class="menu-item"><a href="#">Hébergements</a></li>
-                    <li class="menu-item"><a href="#">Activités</a></li>
+                    <li class="menu-item"><a href="#hebergements">Hébergements</a></li>
+                    <li class="menu-item"><a href="#activites">Activités</a></li>
                 </ul>
             </nav>
         </header>
@@ -38,7 +38,7 @@
                             <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
                         </label>
                         <input type="text" class="search-input" value="Marseille, France">
-                        <button type="submit" class="search-btn">Rechercher</button>
+                        <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass desktop-hidden"></i><span class="desktop-only">Rechercher</span></button>
                     </div> 
                 </form>
 
@@ -64,7 +64,7 @@
             </section>
             <div class="hebergements-and-populaires">
                 <section class="hebergements">
-                    <h2 class="section-title">Hébergements à Marseille</h2> 
+                    <h2 id="hebergements" class="section-title">Hébergements à Marseille</h2> 
                     <div class="hebergements-cards">
                             <a href="#">
                             <article class="card">
@@ -183,7 +183,7 @@
                     </div>
                     <a href="#" class="show-more">Afficher plus</a>
                 </section>
-                <section class="populaires">
+                <section id="populaires" class="populaires">
                     <div class="populaires-title">
                         <h2 class="section-title">Les plus populaires</h2>
                         <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
@@ -250,7 +250,7 @@
                 </section>
             </div>
             <section class="activites">
-                <h2 class="section-title">Activités à Marseille</h2>
+                <h2 id="activites" class="section-title">Activités à Marseille</h2>
                 <div class="activites-cards">
                     <a href="#">
                         <article class="card">
