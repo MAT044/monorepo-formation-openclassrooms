@@ -9,6 +9,17 @@ function redirectTo(string $url): void {
     die();
 }
 
+function addMsg($type, $texte, $details = "") {
+    $_SESSION['messages'] ??= [];
+    $_SESSION['messages'][] = [
+        'type' => $type,
+        'texte' => $texte,
+        'details' => $details
+    ];
+}
+
+$pdo = include 'includes/bdd.php';
+
 $data = $_POST;
 
 $title = sanitize($data['titre'] ?? '');
@@ -39,13 +50,27 @@ if(strlen($description) < 3) {
 }
 
 if(count($errors) > 0) {
-    $_SESSION['messages'] ??= [];
-    $_SESSION['messages'][] = [
-        'type' => 'error',
-        'texte' => 'Le formulaire ne peut pas traité',
-        'details' => implode("\n\r", $errors)
-    ];
+    addMsg(
+        'error', 
+        'Le formulaire ne peut pas traité', 
+        implode("\n\r", $errors)
+    );
     redirectTo('/ajouter.php');
 }
 
+try {
+    $sql = "INSERT INTO oeuvres (title, artist, description, img) VALUES (?, ?, ?, ?);";
+    $request = $pdo->prepare($sql);
+    $request->execute([
+        $title,
+        $artist,
+        $description,
+        $img
+    ]);
+} catch(PDOException $e) {
+    addMsg('error', 'Une erreur est survenue pendant le traitement', $e->getMessage());
+    redirectTo('/ajouter.php');
+}
+
+addMsg('success', 'Oeuvre ' . $title . ' ajoutée !');
 redirectTo('/');
