@@ -1,13 +1,15 @@
+<?php session_start(); ?>
 <!doctype html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
     <title>The ArtBox</title>
 </head>
+
 <body>
     <header>
         <a href="index.php"><img src="img/logo.png" alt="Logo Artbox" id="logo"></a>
@@ -17,4 +19,17 @@
             </ul>
         </nav>
     </header>
+    <?php if (count($messages = $_SESSION['messages'] ?? []) > 0): ?>
+        <div class="messages">
+            <?php foreach ($messages as $message): ?>
+                <div class="message message-<?= $message['type']; ?>">
+                    <p><strong><?= $message['texte']; ?></strong></p>
+                    <p><?= nl2br($message['details']); ?></p>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php
+        $_SESSION['messages'] = [];
+        endif; 
+    ?>
     <main>
