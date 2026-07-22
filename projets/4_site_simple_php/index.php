@@ -1,8 +1,17 @@
 <?php include 'includes/header.php'; ?>
         <div id="liste-oeuvres">
             <?php 
-                $oeuvres = include 'data/oeuvres.php';
-                foreach($oeuvres as $oeuvre):
+                /**
+                 * @var PDO
+                 */
+                $pdo = include 'includes/bdd.php';
+            
+                $sql = "SELECT id, title, artist, description, img FROM oeuvres WHERE 1;";
+                $request = $pdo->prepare($sql);
+                $request->execute();
+                
+
+                while($oeuvre = $request->fetch(PDO::FETCH_ASSOC)):
             ?>
                 <article class="oeuvre">
                     <a href="oeuvre.php?id=<?= $oeuvre['id'] ?>">
@@ -11,7 +20,7 @@
                         <p class="description"><?= $oeuvre['artist'] ?></p>
                     </a>
                 </article>
-            <?php endforeach; ?>
+            <?php endwhile; ?>
             
         </div>
 <?php include 'includes/footer.php'; ?>
