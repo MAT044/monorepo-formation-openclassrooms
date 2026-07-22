@@ -1,0 +1,26 @@
+services:
+  database:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: artbox-root
+      MYSQL_DATABASE: artbox
+      MYSQL_USER: artbox-user
+      MYSQL_PASSWORD: artbox-password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: database
+      PMA_USER: artbox-user
+      PMA_PASSWORD: artbox-password
+    ports:
+      - "8080:80"
+    depends_on:
+      - database
+
