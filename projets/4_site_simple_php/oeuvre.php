@@ -24,7 +24,7 @@ if ($oeuvre === false) {
 ?>
 <article id="detail-oeuvre">
     <div id="img-oeuvre">
-        <img src="img/<?= $oeuvre['img'] ?>" alt="<?= $oeuvre['title'] ?>">
+        <img src="<?= $oeuvre['img'] ?>" alt="<?= $oeuvre['title'] ?>">
     </div>
     <div id="contenu-oeuvre">
         <h1><?= $oeuvre['title'] ?></h1>
