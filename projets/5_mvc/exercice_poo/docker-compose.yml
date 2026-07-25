@@ -1,0 +1,26 @@
+services:
+  database:
+    image: mariadb:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: formation-root
+      MYSQL_DATABASE: db
+      MYSQL_USER: formation-user
+      MYSQL_PASSWORD: formation-password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./var/database:/var/lib/mysql
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: database
+      PMA_USER: formation-user
+      PMA_PASSWORD: formation-password
+    ports:
+      - "8080:80"
+    depends_on:
+      - database
+
