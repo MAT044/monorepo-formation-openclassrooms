@@ -1,5 +1,6 @@
 <?php
 require_once 'src/DBConnect.php';
+require_once 'src/ContactManager.php';
 
 $dbConnect = new DBConnect(
     database: 'db',
@@ -7,7 +8,9 @@ $dbConnect = new DBConnect(
     password: 'formation-password'
 );
 
-$db = $dbConnect->getPDO();
+$pdo = $dbConnect->getPDO();
+
+$contactManager = new ContactManager($pdo);
 
 while (true) {
     $line = readline("Entrez votre commande : ");
