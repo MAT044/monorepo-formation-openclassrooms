@@ -34,9 +34,9 @@ class Contact
         return $this->email;
     }
 
-    public function setEmail(string $email): string
+    public function setEmail(string $email): void
     {
-        return $this->email;
+        $this->email = $email;
     }
 
     public function getPhoneNumber(): string
