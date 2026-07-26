@@ -25,6 +25,7 @@ while (true) {
         preg_match('/^detail ([0-9]+)$/', $line, $matches) => $command->detail($matches[1]),
         preg_match('/^delete ([0-9]+)$/', $line, $matches) => $command->delete($matches[1]),
         preg_match('/^list$/', $line) => $command->list(),
+        preg_match('/^help$/', $line) => $command->help(),
         preg_match('/^quit$/', $line) => $command->quit(),
         default => "",
     };

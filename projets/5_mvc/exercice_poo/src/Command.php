@@ -47,6 +47,17 @@ class Command
         $this->ln("Contact {$id} supprimé !");
     }
 
+    public function help() {
+        $this->ln(
+            "help : affiche cette aide",
+            "list : liste les contacts",
+            "detail [id] : affiche les détails d'un contact",
+            "create [name], [email], [phone number] : crée un contact",
+            "delete [id] : supprime un contact",
+            "quit : quitte le programme"
+        );
+    }
+
     public function quit(): never
     {
         $this->ln("OK, Bye !");
