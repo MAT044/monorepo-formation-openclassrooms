@@ -20,10 +20,10 @@ while (true) {
     $line = readline("Entrez votre commande : ");
 
     $matches = [];
-    match(true) {
-        (bool) preg_match('/create ([a-zA-Z0-9]+), (.+@.+), ([0-9]+)/', $line, $matches) => $command->create($matches[1], $matches[2], $matches[3]),
-        (bool) preg_match('/detail ([0-9]+)/', $line, $matches) => $command->detail($matches[1]),
-        $line === "list" => $command->list(),
+    match(1) {
+        preg_match('/create ([a-zA-Z0-9]+), (.+@.+), ([0-9]+)/', $line, $matches) => $command->create($matches[1], $matches[2], $matches[3]),
+        preg_match('/detail ([0-9]+)/', $line, $matches) => $command->detail($matches[1]),
+        preg_match('/list/', $line) => $command->list(),
         default => "",
     };
     echo "\n";
