@@ -17,7 +17,7 @@ $contactManager = new ContactManager($pdo);
 $command = new Command($contactManager);
 
 while (true) {
-    $line = readline("Entrez votre commande : ");
+    $line = readline("Entrez votre commande (list, detail, create, delete, quit) : ");
 
     $matches = [];
     match(1) {
