@@ -36,6 +36,18 @@ class Command
         echo "\n";
     }
 
+    public function delete(int $id): void
+    {
+        $contact = $this->contactManager->find($id);
+        if($contact === null) {
+            echo "Pas de contact à supprimer.\n";
+            return;
+        }
+
+        $this->contactManager->delete($id);
+        echo "Contact {$id} supprimé !\n";
+    }
+
     public function quit(): never
     {
         echo "OK, Bye !\n";

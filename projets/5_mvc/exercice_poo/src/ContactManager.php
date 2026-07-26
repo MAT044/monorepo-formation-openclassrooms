@@ -18,6 +18,12 @@ class ContactManager
         $contact->setId((int)$this->pdo->lastInsertId());
     }
 
+    public function delete(int $id): void
+    {
+        $statement = $this->pdo->prepare("DELETE FROM contact WHERE id = ?;");
+        $statement->execute([$id]);
+    }
+
     public function findAll(): array
     {
         $statement = $this->pdo->query("SELECT * FROM contact WHERE 1;");
