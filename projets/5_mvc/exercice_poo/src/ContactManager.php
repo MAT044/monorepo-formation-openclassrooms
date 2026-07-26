@@ -10,6 +10,20 @@ class ContactManager
     public function findAll(): array
     {
         $statement = $this->pdo->query("SELECT * FROM contact WHERE 1;");
-        return $statement->fetchAll(PDO::FETCH_CLASS);
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return array_map(
+            fn(array $row) => $this->mapRowToEntity($row),
+            $rows
+        );
+    }
+
+    public function mapRowToEntity(array $row): Contact
+    {
+        return new Contact(
+            $row['id'],
+            $row['name'],
+            $row['email'],
+            $row['phone_number']
+        );
     }
 }

@@ -1,6 +1,7 @@
 <?php
 require_once 'src/DBConnect.php';
 require_once 'src/ContactManager.php';
+require_once 'src/Contact.php';
 
 $dbConnect = new DBConnect(
     database: 'db',
