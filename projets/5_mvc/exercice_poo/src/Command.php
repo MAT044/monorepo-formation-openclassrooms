@@ -7,18 +7,16 @@ class Command
     ){}
     public function list(){
         foreach($this->contactManager->findAll() as $contact) {
-            echo $contact->toString();
-            echo "\n";
+            $this->ln($contact->toString());
         }
     }
 
     public function detail(int $id){
         $contact = $this->contactManager->find($id);
         if($contact !== null) {
-            echo $contact->toString();
-            echo "\n";
+            $this->ln($contact->toString());
         } else {
-            echo "Pas de contact trouvé pour cette ID \n";
+            $this->ln("Pas de contact trouvé pour cette ID");
         }
     }
 
@@ -31,26 +29,31 @@ class Command
             phoneNumber: $phoneNumber
         );
         $this->contactManager->insert($newContact);
-        echo "Contact inséré !\n";
-        echo $newContact->toString();
-        echo "\n";
+        $this->ln(
+            "Contact inséré !",
+            $newContact->toString()
+        );
     }
 
     public function delete(int $id): void
     {
         $contact = $this->contactManager->find($id);
         if($contact === null) {
-            echo "Pas de contact à supprimer.\n";
+            $this->ln("Pas de contact à supprimer.");
             return;
         }
 
         $this->contactManager->delete($id);
-        echo "Contact {$id} supprimé !\n";
+        $this->ln("Contact {$id} supprimé !");
     }
 
     public function quit(): never
     {
-        echo "OK, Bye !\n";
+        $this->ln("OK, Bye !");
         die();
+    }
+
+    private function ln(string ...$msgs,){
+        echo implode("\n\r", $msgs) . "\n\r";
     }
 }
