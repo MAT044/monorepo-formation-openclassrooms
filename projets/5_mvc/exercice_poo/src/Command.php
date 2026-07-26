@@ -35,6 +35,22 @@ class Command
         );
     }
 
+    public function modify(int $id, string $name, string $email, string $phoneNumber)
+    {
+        $contact = $this->contactManager->find($id);
+        if($contact === null) {
+            $this->ln("Contact introuvable.");
+            return;
+        }
+
+        $contact->setName($name);
+        $contact->setEmail($email);
+        $contact->setPhoneNumber($phoneNumber);
+
+        $this->contactManager->update($contact);
+        $this->ln("Contact modifié !", $contact->toString());
+    }
+
     public function delete(int $id): void
     {
         $contact = $this->contactManager->find($id);

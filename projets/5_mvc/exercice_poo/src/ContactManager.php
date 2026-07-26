@@ -18,6 +18,17 @@ class ContactManager
         $contact->setId((int)$this->pdo->lastInsertId());
     }
 
+    public function update(Contact $contact): void
+    {
+        $statement = $this->pdo->prepare("UPDATE contact SET name = ? , email = ?, phone_number = ? WHERE id = ?;");
+        $statement->execute([
+            $contact->getName(),
+            $contact->getEmail(),
+            $contact->getPhoneNumber(),
+            $contact->getId()
+        ]);
+    }
+
     public function delete(int $id): void
     {
         $statement = $this->pdo->prepare("DELETE FROM contact WHERE id = ?;");
