@@ -69,6 +69,7 @@ class Command
             "list : liste les contacts",
             "detail [id] : affiche les détails d'un contact",
             "create [name], [email], [phone number] : crée un contact",
+            "modify [id], [name], [email], [phone number] : modifie un contact",
             "delete [id] : supprime un contact",
             "quit : quitte le programme"
         );
