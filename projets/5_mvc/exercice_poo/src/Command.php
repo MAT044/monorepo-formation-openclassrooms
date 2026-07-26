@@ -35,4 +35,10 @@ class Command
         echo $newContact->toString();
         echo "\n";
     }
+
+    public function quit(): never
+    {
+        echo "OK, Bye !\n";
+        die();
+    }
 }
