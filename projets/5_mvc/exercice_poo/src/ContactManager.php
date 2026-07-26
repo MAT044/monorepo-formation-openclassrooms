@@ -1,11 +1,22 @@
 <?php
 
-class ContactManager 
+class ContactManager
 {
     public function __construct(
         private readonly \PDO $pdo
-    )
-    {}
+    ) {
+    }
+
+    public function insert(Contact $contact): void
+    {
+        $statement = $this->pdo->prepare("INSERT INTO contact (name, email, phone_number) VALUES (?, ?, ?);");
+        $statement->execute([
+            $contact->getName(),
+            $contact->getEmail(),
+            $contact->getPhoneNumber()
+        ]);
+        $contact->setId((int)$this->pdo->lastInsertId());
+    }
 
     public function findAll(): array
     {
@@ -17,12 +28,12 @@ class ContactManager
         );
     }
 
-    public function find(int $id): ?Contact {
+    public function find(int $id): ?Contact
+    {
         $statement = $this->pdo->prepare("SELECT * FROM contact WHERE id = ?;");
         $statement->execute([$id]);
         $row = $statement->fetch(\PDO::FETCH_ASSOC);
-        if(empty($row))
-        {
+        if (empty($row)) {
             return null;
         }
         return $this->mapRowToEntity($row);
