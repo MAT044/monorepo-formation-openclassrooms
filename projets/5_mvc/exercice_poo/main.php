@@ -18,6 +18,9 @@ while (true) {
     echo "Vous avez saisi : $line\n";
 
     if($line === "list") {
-        echo "affichage de la liste\n";
+        foreach($contactManager->findAll() as $contact) {
+            echo $contact->toString();
+            echo "\n";
+        }
     }
 }
