@@ -21,8 +21,8 @@ while (true) {
 
     $matches = [];
     match(1) {
-        preg_match('/^create ([a-zA-Z0-9]+), (.+@.+), ([0-9]+)$/', $line, $matches) => $command->create($matches[1], $matches[2], $matches[3]),
-        preg_match('/^modify ([0-9]+), ([a-zA-Z0-9]+), (.+@.+), ([0-9]+)$/', $line, $matches) => $command->modify($matches[1], $matches[2], $matches[3], $matches[4]),
+        preg_match('/^create ([a-zA-Z0-9 ]+), (.+@.+), ([0-9]+)$/', $line, $matches) => $command->create($matches[1], $matches[2], $matches[3]),
+        preg_match('/^modify ([0-9]+), ([a-zA-Z0-9 ]+), (.+@.+), ([0-9]+)$/', $line, $matches) => $command->modify($matches[1], $matches[2], $matches[3], $matches[4]),
         preg_match('/^detail ([0-9]+)$/', $line, $matches) => $command->detail($matches[1]),
         preg_match('/^delete ([0-9]+)$/', $line, $matches) => $command->delete($matches[1]),
         preg_match('/^list$/', $line) => $command->list(),
