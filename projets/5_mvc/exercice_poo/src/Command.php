@@ -7,14 +7,14 @@ class Command
     ){}
     public function list(){
         foreach($this->contactManager->findAll() as $contact) {
-            $this->ln($contact->toString());
+            $this->ln($contact);
         }
     }
 
     public function detail(int $id){
         $contact = $this->contactManager->find($id);
         if($contact !== null) {
-            $this->ln($contact->toString());
+            $this->ln($contact);
         } else {
             $this->ln("Pas de contact trouvé pour cette ID");
         }
@@ -31,7 +31,7 @@ class Command
         $this->contactManager->insert($newContact);
         $this->ln(
             "Contact inséré !",
-            $newContact->toString()
+            $newContact
         );
     }
 
@@ -48,7 +48,7 @@ class Command
         $contact->setPhoneNumber($phoneNumber);
 
         $this->contactManager->update($contact);
-        $this->ln("Contact modifié !", $contact->toString());
+        $this->ln("Contact modifié !", $contact);
     }
 
     public function delete(int $id): void
