@@ -11,4 +11,14 @@ class Command
             echo "\n";
         }
     }
+
+    public function detail(int $id){
+        $contact = $this->contactManager->find($id);
+        if($contact !== null) {
+            echo $contact->toString();
+            echo "\n";
+        } else {
+            echo "Pas de contact trouvé pour cette ID \n";
+        }
+    }
 }

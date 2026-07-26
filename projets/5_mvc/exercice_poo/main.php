@@ -23,4 +23,9 @@ while (true) {
     if($line === "list") {
         $command->list();
     }
+
+    $matches = [];
+    if(preg_match('/detail ([0-9]+)/', $line, $matches)){
+        $command->detail($matches[1]);
+    }
 }
