@@ -1,0 +1,26 @@
+services:
+  database:
+    image: mariadb:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: forteroche-root
+      MYSQL_DATABASE: blog_forteroche
+      MYSQL_USER: forteroche-user
+      MYSQL_PASSWORD: forteroche-password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./var/database:/var/lib/mysql
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: database
+      PMA_USER: forteroche-user
+      PMA_PASSWORD: forteroche-password
+    ports:
+      - "8080:80"
+    depends_on:
+      - database
+
