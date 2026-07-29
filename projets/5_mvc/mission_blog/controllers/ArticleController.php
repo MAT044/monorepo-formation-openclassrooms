@@ -31,6 +31,13 @@ class ArticleController
             throw new Exception("L'article demandé n'existe pas.");
         }
 
+        $_SESSION['articles_vues'] ??= [];
+        if(!in_array($id, $_SESSION['articles_vues'])) {
+            $article->increaseVues();
+            $articleManager->updateArticle($article);
+            $_SESSION['articles_vues'][] = $id;
+        }
+
         $commentManager = new CommentManager();
         $comments = $commentManager->getAllCommentsByArticleId($id);
 

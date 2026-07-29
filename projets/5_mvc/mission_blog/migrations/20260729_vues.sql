@@ -1,0 +1,1 @@
+ALTER TABLE `article` ADD `vues` INT UNSIGNED NOT NULL DEFAULT '0' AFTER `date_update`;

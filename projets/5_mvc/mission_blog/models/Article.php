@@ -12,6 +12,8 @@
     private ?DateTime $dateCreation = null;
     private ?DateTime $dateUpdate = null;  
 
+    private int $vues = 0;
+
     /**
      * Setter pour l'id de l'utilisateur. 
      * @param int $idUser
@@ -126,5 +128,19 @@
     public function getDateUpdate() : ?DateTime 
     {
         return $this->dateUpdate;
+    }
+
+    /**
+     * Augmente le compteur de vues 
+     * @return void
+     */
+    public function increaseVues(): void
+    {
+        $this->vues++;
+    }
+
+    public function getVues(): int
+    {
+        return $this->vues;
     }
  }
