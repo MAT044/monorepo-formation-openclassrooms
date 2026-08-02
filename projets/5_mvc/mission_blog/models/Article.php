@@ -129,16 +129,6 @@
     {
         return $this->dateUpdate;
     }
-
-    /**
-     * Augmente le compteur de vues 
-     * @return void
-     */
-    public function increaseVues(): void
-    {
-        $this->vues++;
-    }
-
     public function getVues(): int
     {
         return $this->vues;

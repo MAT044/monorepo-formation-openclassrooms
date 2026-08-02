@@ -31,10 +31,12 @@ class ArticleController
             throw new Exception("L'article demandé n'existe pas.");
         }
 
+        /**
+         * On sauvegarde dans la session pour éviter de dupliquer les vues
+         */
         $_SESSION['articles_vues'] ??= [];
         if(!in_array($id, $_SESSION['articles_vues'])) {
-            $article->increaseVues();
-            $articleManager->updateArticle($article);
+            $articleManager->increaseArticleVues($id);
             $_SESSION['articles_vues'][] = $id;
         }
 

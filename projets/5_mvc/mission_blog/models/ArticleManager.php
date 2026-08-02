@@ -74,11 +74,10 @@ class ArticleManager extends AbstractEntityManager
      */
     public function updateArticle(Article $article) : void
     {
-        $sql = "UPDATE article SET title = :title, content = :content, date_update = NOW(), vues = :vues WHERE id = :id";
+        $sql = "UPDATE article SET title = :title, content = :content, date_update = NOW() WHERE id = :id";
         $this->db->query($sql, [
             'title' => $article->getTitle(),
             'content' => $article->getContent(),
-            'vues' => $article->getVues(),
             'id' => $article->getId()
         ]);
     }
@@ -92,5 +91,13 @@ class ArticleManager extends AbstractEntityManager
     {
         $sql = "DELETE FROM article WHERE id = :id";
         $this->db->query($sql, ['id' => $id]);
+    }
+
+    public function increaseArticleVues(int $id) : void
+    {
+        $sql = "UPDATE article SET vues = vues + 1 WHERE id = :id";
+        $this->db->query($sql, [
+            'id' => $id
+        ]);
     }
 }
