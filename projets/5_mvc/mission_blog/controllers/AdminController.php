@@ -186,9 +186,12 @@ class AdminController {
         // On vérifie que l'utilisateur est connecté.
         $this->checkIfUserIsConnected();
 
+        $order = Utils::request("order", "id");
+        $direction = Utils::request("direction", "ASC");
+
         // On récupère les articles.
         $articleManager = new ArticleManager();
-        $articles = $articleManager->getAllArticles();
+        $articles = $articleManager->getArticlesInformations($order, $direction);
 
         $commentManager = new CommentManager();
         $commentsPerArticle = $commentManager->countCommentsPerArticle();
@@ -197,7 +200,9 @@ class AdminController {
         $view = new View("Monitoring");
         $view->render("monitoring", [
             'articles' => $articles,
-            'commentsPerArticle' => $commentsPerArticle
+            'commentsPerArticle' => $commentsPerArticle,
+            'order' => $order,
+            'direction' => $direction
         ]);
     }
 }

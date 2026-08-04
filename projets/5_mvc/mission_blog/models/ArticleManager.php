@@ -9,9 +9,17 @@ class ArticleManager extends AbstractEntityManager
      * Récupère tous les articles.
      * @return array : un tableau d'objets Article.
      */
-    public function getAllArticles() : array
+    public function getAllArticles(string $orderBy = "id", string $direction = "asc") : array
     {
-        $sql = "SELECT * FROM article";
+        if(!in_array(strtolower($orderBy), ['id', 'title', 'vues', 'date_creation'])) {
+            throw new InvalidArgumentException('Invalid argument orderBy');
+        }
+
+        if(!in_array(strtolower($direction), ['asc', 'desc'])) {
+            throw new InvalidArgumentException('Invalid argument direction');
+        }
+
+        $sql = "SELECT * FROM article ORDER BY {$orderBy} {$direction}";
         $result = $this->db->query($sql);
         $articles = [];
 
@@ -99,5 +107,22 @@ class ArticleManager extends AbstractEntityManager
         $this->db->query($sql, [
             'id' => $id
         ]);
+    }
+
+    public function getArticlesInformations(string $orderBy = "id", string $direction = "asc") : array
+    {
+        if(!in_array(strtolower($orderBy), ['id', 'title', 'vues', 'date_creation', 'comments'])) {
+            throw new InvalidArgumentException('Invalid argument orderBy');
+        }
+
+        if(!in_array(strtolower($direction), ['asc', 'desc'])) {
+            throw new InvalidArgumentException('Invalid argument direction');
+        }
+
+        $sql = "SELECT article.id, article.title, article.vues, article.date_creation, COUNT(comment.id) as comments FROM article LEFT JOIN comment ON article.id = comment.id_article GROUP BY article.id ORDER BY {$orderBy} {$direction}";
+        $result = $this->db->query($sql);
+        $articles = $result->fetchAll();
+
+        return $articles;
     }
 }

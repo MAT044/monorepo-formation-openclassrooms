@@ -87,4 +87,14 @@ class Utils {
         return $_REQUEST[$variableName] ?? $defaultValue;
     }
 
+
+    public static function route(string $action, array $params = []): string
+    {
+        $params['action'] = $action;
+        $queryParams = [];
+        foreach($params as $key => $value) {
+            $queryParams[] = "{$key}={$value}";
+        }
+        return "/index.php?" . implode( "&", $queryParams);
+    }
 }

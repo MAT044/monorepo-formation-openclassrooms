@@ -31,6 +31,12 @@
         </nav>
         <h1>Emilie Forteroche</h1>
     </header>
+    <?php if (isset($_SESSION['user'])): ?>
+            <nav class="admin-nav">
+                <a href="index.php?action=admin">Articles</a> - 
+                <a href="index.php?action=monitoring">Monitoring</a>
+            </nav>
+    <?php endif; ?>
 
     <main>    
         <?= $content /* Ici est affiché le contenu réel de la page. */ ?>
