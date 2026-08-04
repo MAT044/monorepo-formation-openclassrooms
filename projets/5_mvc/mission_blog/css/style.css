@@ -350,3 +350,36 @@ footer {
     color: white;
     background-color: var(--headerColor);
 }
+
+
+/**
+ * Tables 
+ */
+
+ .table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+ }
+
+ .table th, .table td {
+    padding: 0.5rem 1rem;
+ }
+
+.table th {
+    background-color: var(--commentColor);
+    color: white;
+}
+
+.table tr {
+    transition: background-color 0.25s ease-in, color 0.25s ease-in;
+}
+
+ .table tr:nth-child(even) {
+    background-color: var(--quoteColor);
+ }
+
+ .table tr:hover {
+    background-color: var(--commentPaleColor);
+    color: white;
+ }
