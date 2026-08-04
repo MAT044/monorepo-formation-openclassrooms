@@ -130,11 +130,21 @@
         return $this->dateUpdate;
     }
 
+    /**
+     * Setter pour le nombre de vues
+     * Nécessaire à l'hydratation
+     * @param int $vues
+     * @return void
+     */
     public function setVues(int $vues): void
     {
         $this->vues = $vues;
     }
 
+    /**
+     * Getter pour le nombre de vues
+     * @return int
+     */
     public function getVues(): int
     {
         return $this->vues;
