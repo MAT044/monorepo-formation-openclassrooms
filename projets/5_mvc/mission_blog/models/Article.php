@@ -129,6 +129,12 @@
     {
         return $this->dateUpdate;
     }
+
+    public function setVues(int $vues): void
+    {
+        $this->vues = $vues;
+    }
+
     public function getVues(): int
     {
         return $this->vues;
