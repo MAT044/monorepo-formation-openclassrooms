@@ -186,7 +186,7 @@ class AdminController {
         // On vérifie que l'utilisateur est connecté.
         $this->checkIfUserIsConnected();
 
-        $order = Utils::request("order", "id");
+        $order = Utils::request("order", "title");
         $direction = Utils::request("direction", "ASC");
 
         // On récupère les articles.

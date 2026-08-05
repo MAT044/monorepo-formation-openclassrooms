@@ -7,13 +7,18 @@
 
 <h2>Monitoring</h2>
 
+<div class="info">
+    <p>Cliquez sur les titres des colonnes pour trier le tableau</p>
+</div>
+
 <table class="table">
     <thead>
         <th>
             <a href="<?= Utils::route('monitoring', [
                 'order' => "title",
                 'direction' => ($order === "title" && $direction === 'ASC') ? "DESC" : "ASC"
-            ]) ?>">
+            ]) ?>"
+                title="Trier par titre" >
                 Titre
                 <?php if ($order === "title"):
                     echo ($direction === 'ASC') ? "&uarr;" : "&darr;";
@@ -24,7 +29,8 @@
             <a href="<?= Utils::route('monitoring', [
                 'order' => "comments",
                 'direction' => ($order === "comments" && $direction === 'ASC') ? "DESC" : "ASC"
-            ]) ?>">
+            ]) ?>"
+            title="Trier par nombre de commentaires" >
                 Commentaires
                 <?php if ($order === "comments"):
                     echo ($direction === 'ASC') ? "&uarr;" : "&darr;";
@@ -35,7 +41,8 @@
             <a href="<?= Utils::route('monitoring', [
                 'order' => "vues",
                 'direction' => ($order === "vues" && $direction === 'ASC') ? "DESC" : "ASC"
-            ]) ?>">
+            ]) ?>"
+            title="Trier par nombre de vues">
                 Vues
                 <?php if ($order === "vues"):
                     echo ($direction === 'ASC') ? "&uarr;" : "&darr;";
@@ -46,7 +53,8 @@
             <a href="<?= Utils::route('monitoring', [
                 'order' => "date_creation",
                 'direction' => ($order === "date_creation" && $direction === 'ASC') ? "DESC" : "ASC"
-            ]) ?>">
+            ]) ?>"
+            title="Trier par date de création" >
                 Date Publication
                 <?php if ($order === "date_creation"):
                     echo ($direction === 'ASC') ? "&uarr;" : "&darr;";
