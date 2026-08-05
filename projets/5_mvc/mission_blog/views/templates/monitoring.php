@@ -13,7 +13,7 @@
 
 <table class="table">
     <thead>
-        <th>
+        <th <?= ($order === "title") ? 'class="active"' : '' ?> >
             <a href="<?= Utils::route('monitoring', [
                 'order' => "title",
                 'direction' => ($order === "title" && $direction === 'ASC') ? "DESC" : "ASC"
@@ -25,7 +25,7 @@
                 endif; ?>
             </a>
         </th>
-        <th>
+        <th <?= ($order === "comments") ? 'class="active"' : '' ?>>
             <a href="<?= Utils::route('monitoring', [
                 'order' => "comments",
                 'direction' => ($order === "comments" && $direction === 'ASC') ? "DESC" : "ASC"
@@ -37,7 +37,7 @@
                 endif; ?>
             </a>
         </th>
-        <th>
+        <th <?= ($order === "vues") ? 'class="active"' : '' ?>>
             <a href="<?= Utils::route('monitoring', [
                 'order' => "vues",
                 'direction' => ($order === "vues" && $direction === 'ASC') ? "DESC" : "ASC"
@@ -49,7 +49,7 @@
                 endif; ?>
             </a>
         </th>
-        <th>
+        <th <?= ($order === "date_creation") ? 'class="active"' : '' ?>>
             <a href="<?= Utils::route('monitoring', [
                 'order' => "date_creation",
                 'direction' => ($order === "date_creation" && $direction === 'ASC') ? "DESC" : "ASC"

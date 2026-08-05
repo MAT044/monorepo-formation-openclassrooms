@@ -362,14 +362,23 @@ footer {
     border-collapse: collapse;
  }
 
- .table th, .table td {
+ .table th a, .table td {
     padding: 0.5rem 1rem;
  }
 
+ .table th a {
+    display: block;
+ }
+
 .table th {
-    background-color: var(--commentColor);
+    background-color: var(--commentPaleColor);
     color: white;
 }
+
+.table th.active {
+    background-color: var(--commentColor);
+    color: white;
+} 
 
 .table tr {
     transition: background-color 0.25s ease-in, color 0.25s ease-in;
