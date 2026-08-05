@@ -205,4 +205,25 @@ class AdminController {
             'direction' => $direction
         ]);
     }
+
+    /**
+     * Suppression d'un article.
+     * @return void
+     */
+    public function deleteComment() : void
+    {
+        $this->checkIfUserIsConnected();
+    
+        $id = Utils::request("id", -1);
+
+        // On supprime l'article.
+        $commentManager = new CommentManager();
+        $comment = $commentManager->getCommentById($id);
+        $idArticle = $comment->getIdArticle();
+
+        $commentManager->deleteComment($comment);
+       
+        
+        Utils::redirect("showArticle", ['id' => $idArticle]);      
+    }
 }

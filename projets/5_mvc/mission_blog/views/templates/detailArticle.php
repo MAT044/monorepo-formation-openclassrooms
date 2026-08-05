@@ -31,6 +31,14 @@
                 echo '  <div class="detailComment">';
                 echo '      <h3 class="info">Le ' . Utils::convertDateToFrenchFormat($comment->getDateCreation()) . ", " . Utils::format($comment->getPseudo()) . ' a écrit :</h3>';
                 echo '      <p class="content">' . Utils::format($comment->getContent()) . '</p>';
+                if($_SESSION['user']){
+                    echo '<form action="index.php" method="post" class="actionsComment">';
+                    echo '<input type="hidden" name="action" value="deleteComment">';
+                    echo '<input type="hidden" name="id" value="'. $comment->getId() .'">';
+                    echo '<input type="hidden" name="idArticle" value="' . $article->getId() . '">';
+                    echo '<button class="submit">Supprimer ce commentaire</button>';
+                    echo '</form>';
+                }
                 echo '  </div>';
                 echo '</li>';
             }               

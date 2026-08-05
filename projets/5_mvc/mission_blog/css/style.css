@@ -274,6 +274,10 @@ a.info {
 }
 
 /* On redéfinit certaines parties du "info" pour l'affichage dans les commentaires */
+.detailComment {
+    width: 100%;
+}
+
 .detailComment .info {
     margin: 5px 0 5px 0;
     font-style: normal;
