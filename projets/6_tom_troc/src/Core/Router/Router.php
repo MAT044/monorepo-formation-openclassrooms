@@ -4,6 +4,7 @@ namespace TomTroc\Core\Router;
 
 use Closure;
 use Throwable;
+use TomTroc\Core\DependencyContainer\DependencyContainer;
 use TomTroc\Core\Http\Method;
 use TomTroc\Core\Http\Request;
 use TomTroc\Core\Http\Response;
@@ -14,7 +15,9 @@ class Router
         'GET' => [],
         'POST' => []
     ];
-    public function __construct()
+    public function __construct(
+        private readonly DependencyContainer $container
+    )
     {
     }
 
@@ -51,8 +54,14 @@ class Router
         die();
     }
 
-    public function addRoute(string $name, string $path, Closure $controller, Method $method)
+    public function addRoute(string $name, string $path, Closure|array $controller, Method $method)
     {
+        if(is_array($controller)){
+            $controllerClassname = $controller[0];
+            $controllerMethod = $controller[1] ?? "__invoke";
+            $controller = fn(Request $request) => $this->container->resolve($controllerClassname)->$controllerMethod($request);
+        }
+
         $this->routes[$method->value][] = new Route(
             $name,
             $path,
@@ -60,17 +69,17 @@ class Router
             $method
         );
     }
-    public function get(string $name, string $path, Closure $controller)
+    public function get(string $name, string $path, Closure|array $controller)
     {
         $this->addRoute($name, $path, $controller, Method::GET);
     }
 
-    public function post(string $name, string $path, Closure $controller)
+    public function post(string $name, string $path, Closure|array $controller)
     {
         $this->addRoute($name, $path, $controller, Method::POST);
     }
 
-    public function all(string $name, string $path, Closure $controller)
+    public function all(string $name, string $path, Closure|array $controller)
     {
         $this->get($name, $path, $controller);
         $this->post($name, $path, $controller);

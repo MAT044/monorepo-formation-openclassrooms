@@ -9,7 +9,7 @@ require dirname(__DIR__) . '/autoload.php';
 
 $container = new DependencyContainer(
     [
-        Router::class => fn() => RouterFactory::fromConfigPath(dirname(__DIR__) . '/config/routes.php')->create()
+        Router::class => fn($container) => RouterFactory::fromConfigPath(dirname(__DIR__) . '/config/routes.php')->create($container)
     ]
 );
 
