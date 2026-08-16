@@ -2,7 +2,6 @@
 
 namespace TomTroc\Core\DependencyContainer;
 
-
 class DependencyContainer {
     private array $cache = [];
 
@@ -20,6 +19,11 @@ class DependencyContainer {
         if(isset($this->factories[$classname])) {
             return ($this->factories[$classname])($this);
         }
-        return new $classname;
+
+        if(class_exists($classname)){
+            return new $classname;
+        }
+        
+        throw new ClassnameNotFoundException($classname);
     }
 }
