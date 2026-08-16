@@ -4,28 +4,26 @@ namespace TomTroc\Core\Router;
 
 use Closure;
 use Throwable;
-use TomTroc\Controller\HomeController;
 use TomTroc\Core\Http\Method;
 use TomTroc\Core\Http\Request;
 use TomTroc\Core\Http\Response;
 
-class Router {
+class Router
+{
     private array $routes = [
         'GET' => [],
         'POST' => []
     ];
     public function __construct()
     {
-        $this->get('app_home', '/', fn() => (new HomeController())->index());
-        $this->get('app_home', '/home', fn() => (new HomeController())->index());
     }
 
     public function findRoute(Request $request): Route
     {
-        foreach($this->routes[$request->method->value] as $route) {
-            $routePattern = '/^'. str_replace('/', '\/', trim($route->path, '/')) . '$/';
+        foreach ($this->routes[$request->method->value] as $route) {
+            $routePattern = '/^' . str_replace('/', '\/', trim($route->path, '/')) . '$/';
             $requestUri = str_replace('/', '\/', trim($request->uri, '/'));
-            if(preg_match($routePattern, $requestUri)){
+            if (preg_match($routePattern, $requestUri)) {
                 return $route;
             }
         }
@@ -37,14 +35,14 @@ class Router {
         try {
             $route = $this->findRoute($request);
             $response = ($route->controller)($request);
-        } catch(RouteNotFound) {
+        } catch (RouteNotFound) {
             $response = new Response(404, '404 - Not found');
         } catch (Throwable) {
             $response = new Response(500, '500 - Unexpected error');
         }
-        
 
-        if(!$response instanceof Response){
+
+        if (!$response instanceof Response) {
             $response = new Response(200, (string) $response);
         }
 
@@ -53,7 +51,8 @@ class Router {
         die();
     }
 
-    public function addRoute(string $name, string $path, Closure $controller, Method $method) {
+    public function addRoute(string $name, string $path, Closure $controller, Method $method)
+    {
         $this->routes[$method->value][] = new Route(
             $name,
             $path,
@@ -61,15 +60,18 @@ class Router {
             $method
         );
     }
-    public function get(string $name, string $path, Closure $controller) {
+    public function get(string $name, string $path, Closure $controller)
+    {
         $this->addRoute($name, $path, $controller, Method::GET);
     }
 
-    public function post(string $name, string $path, Closure $controller) {
+    public function post(string $name, string $path, Closure $controller)
+    {
         $this->addRoute($name, $path, $controller, Method::POST);
     }
 
-    public function all(string $name, string $path, Closure $controller) {
+    public function all(string $name, string $path, Closure $controller)
+    {
         $this->get($name, $path, $controller);
         $this->post($name, $path, $controller);
     }
