@@ -2,7 +2,7 @@
 
 namespace TomTroc\Core\Router;
 
-use Exception;
+use Closure;
 use Throwable;
 use TomTroc\Controller\HomeController;
 use TomTroc\Core\Http\Method;
@@ -16,8 +16,8 @@ class Router {
     ];
     public function __construct()
     {
-        $this->routes['GET'][] = new Route('app_home', '/', fn() => (new HomeController())->index(), Method::GET);
-        $this->routes['GET'][] = new Route('app_home', '/home', fn() => (new HomeController())->index(), Method::GET);
+        $this->get('app_home', '/', fn() => (new HomeController())->index());
+        $this->get('app_home', '/home', fn() => (new HomeController())->index());
     }
 
     public function findRoute(Request $request): Route
@@ -51,5 +51,26 @@ class Router {
         http_response_code($response->code);
         echo $response->body;
         die();
+    }
+
+    public function addRoute(string $name, string $path, Closure $controller, Method $method) {
+        $this->routes[$method->value][] = new Route(
+            $name,
+            $path,
+            $controller,
+            $method
+        );
+    }
+    public function get(string $name, string $path, Closure $controller) {
+        $this->addRoute($name, $path, $controller, Method::GET);
+    }
+
+    public function post(string $name, string $path, Closure $controller) {
+        $this->addRoute($name, $path, $controller, Method::POST);
+    }
+
+    public function all(string $name, string $path, Closure $controller) {
+        $this->get($name, $path, $controller);
+        $this->post($name, $path, $controller);
     }
 }
