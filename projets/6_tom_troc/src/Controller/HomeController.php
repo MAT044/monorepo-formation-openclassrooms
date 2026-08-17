@@ -2,11 +2,13 @@
 
 namespace TomTroc\Controller;
 
+use TomTroc\Core\Framework\AbstractController;
 use TomTroc\Core\Http\Response;
+use TomTroc\View\HomeView;
 
-class HomeController {
-    public function index()
+class HomeController extends AbstractController{
+    public function index(): Response
     {
-        return new Response(200, 'Ok');
+        return $this->view(HomeView::class);
     }
 }
