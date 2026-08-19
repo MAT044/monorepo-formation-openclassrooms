@@ -1,10 +1,14 @@
 :root {
     --text-color: #292929;
     --text-secondary-color: #A6A6A6;
+    --text-white-color: #FFFFFF;
+
     --primary-color: #00AC66;
     --primary-dark-color: #006D41;
-    --background-color: #FFFFFF;
+
+    --background-color: #FAF9F7;
     --background-secondary-color: #F5F3EF;
+    --background-white-color: #FFFFFF;
 }
 
 * {
@@ -22,6 +26,7 @@ body {
     font-weight: 400;
     line-height: 1.2;
     color: var(--text-color);
+    background-color: var(--background-color);
 }
 
 h1,
@@ -82,7 +87,7 @@ img {
 
 .tt-footer-navbar {
     flex-direction: row-reverse;
-    background-color: var(--background-color);
+    background-color: var(--background-white-color);
     font-size: 12px;
 }
 
@@ -175,7 +180,7 @@ img {
 
 .tt-cta {
     background-color: var(--primary-color);
-    color: var(--background-color);
+    color: var(--text-white-color);
 }
 
 .tt-cta-outline {
@@ -184,7 +189,7 @@ img {
 
 .tt-cta:hover, .tt-cta-outline:hover {
     background-color: var(--primary-dark-color);
-    color: var(--background-color);
+    color: var(--text-white-color);
     border: 1px solid var(--primary-dark-color);
 }
 
@@ -197,7 +202,7 @@ img {
 
 .tt-text-card {
     padding: 22px 18px;
-    background-color: var(--background-color);
+    background-color: var(--background-white-color);
     border-radius: 10px;
     font-size: 14px;
 }
