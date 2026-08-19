@@ -4,7 +4,14 @@
     --background-secondary-color: #F5F3EF;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     padding : 0;
     margin: 0;
     font-family: "Inter", sans-serif;
@@ -24,19 +31,22 @@ a:hover {
     font-weight: 600;
 }
 
-.tt-header {
-    background-color: var(--background-secondary-color);
+.tt-logo {
+    display: inline-block;
 }
 
-.tt-logo {
-    padding: 15px 30px;
+.tt-logo-wrapper {
     display: block;
+    padding: 15px 30px;
 }
 
 .tt-navbar {
+    width: 100%;
+    background-color: var(--background-secondary-color);
+}
+
+.tt-navbar > .tt-container {
     display: flex;
-    margin: auto;
-    max-width: 1440px;
 }
 
 .tt-menu {
@@ -53,11 +63,21 @@ a:hover {
     list-style: none;
     padding: 0;
     margin: 0;
-
 }
 
 .tt-menu-item {
     display: block;
     line-height: 1;
     padding: 32px 16px;
+}
+
+.tt-main {
+    flex: 1;
+}
+
+.tt-container {
+    width: 100%;
+    max-width: 1080px;
+    padding: 0px 32px;
+    margin: auto;
 }
