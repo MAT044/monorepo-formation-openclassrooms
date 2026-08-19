@@ -41,16 +41,24 @@ a:hover {
 }
 
 .tt-navbar {
+    display: flex;
     width: 100%;
     background-color: var(--background-secondary-color);
+    align-items: center;
 }
 
 .tt-navbar > .tt-container {
     display: flex;
 }
 
+.tt-footer-navbar {
+    flex-direction: row-reverse;
+    background-color: var(--background-color);
+}
+
 .tt-menu {
     display: flex;
+    flex-direction: inherit;
     justify-content: space-between;
 
     flex: 1;
