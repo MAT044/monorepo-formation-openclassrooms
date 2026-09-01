@@ -12,4 +12,14 @@ readonly class User {
         public string $username,
         public DateTimeImmutable $registeredAt,
     ){}
+    
+    public function withId(int $id) {
+        return new User(
+            $id,
+            $this->email,
+            $this->passwordHash,
+            $this->username,
+            $this->registeredAt
+        );
+    }
 }

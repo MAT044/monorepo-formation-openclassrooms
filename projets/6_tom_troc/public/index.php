@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 use TomTroc\Core\DependencyContainer\DependencyContainer;
 use TomTroc\Core\Http\Request;
 use TomTroc\Core\Router\Router;
