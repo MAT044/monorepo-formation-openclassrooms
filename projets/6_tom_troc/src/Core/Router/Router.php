@@ -40,8 +40,8 @@ class Router
             $response = ($route->controller)($request);
         } catch (RouteNotFound) {
             $response = new Response(404, '404 - Not found');
-        } catch (Throwable) {
-            $response = new Response(500, '500 - Unexpected error');
+        } catch (Throwable $e) {
+            $response = new Response(500, '500 - Unexpected error : ' . $e->getMessage());
         }
 
 
@@ -50,6 +50,9 @@ class Router
         }
 
         http_response_code($response->code);
+        foreach($response->headers as $header) {
+            header($header);
+        }
         echo $response->body;
         die();
     }
