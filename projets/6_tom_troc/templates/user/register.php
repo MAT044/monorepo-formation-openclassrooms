@@ -22,7 +22,7 @@
                     <input name="password" type="password" class="tt-form-input">
                 </div>
                 <div class="tt-form-actions">
-                    <button class="tt-cta">Connexion</button>
+                    <button class="tt-cta">S'inscrire</button>
                 </div>
             </form>
             <p>Pas de compte ? <a href="/inscription">Inscrivez-vous</a></p>
