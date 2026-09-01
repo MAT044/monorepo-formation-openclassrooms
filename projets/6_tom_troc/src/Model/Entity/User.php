@@ -22,4 +22,18 @@ readonly class User {
             $this->registeredAt
         );
     }
+
+    public function update(
+        string $email,
+        string $passwordHash,
+        string $username
+    ) {
+        return new User(
+            $this->id,
+            $email,
+            $passwordHash,
+            $username,
+            $this->registeredAt
+        );
+    }
 }
