@@ -24,4 +24,13 @@ class Request {
             $_POST
         );
     }
+
+    public function mergeQuery(array $params): Request {
+        return new Request(
+            $this->method,
+            $this->uri,
+            array_merge($this->query, $params),
+            $this->body
+        );
+    }
 }

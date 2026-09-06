@@ -17,17 +17,23 @@ class Router
     ];
     public function __construct(
         private readonly DependencyContainer $container
-    )
-    {
-    }
+    ) {}
 
-    public function findRoute(Request $request): Route
+    public function findRoute(Request $request): array
     {
         foreach ($this->routes[$request->method->value] as $route) {
-            $routePattern = '/^' . str_replace('/', '\/', trim($route->path, '/')) . '$/';
-            $requestUri = str_replace('/', '\/', trim($request->uri, '/'));
-            if (preg_match($routePattern, $requestUri)) {
-                return $route;
+            $requestUri = trim($request->uri, '/');
+
+            $routePath = $route->path;
+            $routePattern = preg_replace(
+                '/\{([^}]+)\}/',
+                '(?<$1>[^/]+)',
+                $routePath
+            );
+            $routePattern = '/^' . str_replace('/', '\/', trim($routePattern, '/')) . '$/';
+
+            if (preg_match($routePattern, $requestUri, $matches)) {
+                return [$route, $matches];
             }
         }
         throw new RouteNotFound();
@@ -36,7 +42,8 @@ class Router
     public function handleRequest(Request $request)
     {
         try {
-            $route = $this->findRoute($request);
+            list($route, $queryParams) = $this->findRoute($request);
+            $request = $request->mergeQuery($queryParams);
             $response = ($route->controller)($request);
         } catch (RouteNotFound) {
             $response = new Response(404, '404 - Not found');
@@ -50,7 +57,7 @@ class Router
         }
 
         http_response_code($response->code);
-        foreach($response->headers as $header) {
+        foreach ($response->headers as $header) {
             header($header);
         }
         echo $response->body;
@@ -59,7 +66,7 @@ class Router
 
     public function addRoute(string $name, string $path, Closure|array $controller, Method $method)
     {
-        if(is_array($controller)){
+        if (is_array($controller)) {
             $controllerClassname = $controller[0];
             $controllerMethod = $controller[1] ?? "__invoke";
             $controller = fn(Request $request) => $this->container->resolve($controllerClassname)->$controllerMethod($request);
