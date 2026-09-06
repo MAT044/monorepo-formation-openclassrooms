@@ -11,6 +11,7 @@ readonly class User {
         public string $passwordHash,
         public string $username,
         public DateTimeImmutable $registeredAt,
+        public ?string $avatarUri
     ){}
     
     public function withId(int $id) {
@@ -19,7 +20,8 @@ readonly class User {
             $this->email,
             $this->passwordHash,
             $this->username,
-            $this->registeredAt
+            $this->registeredAt,
+            $this->avatarUri
         );
     }
 
@@ -33,7 +35,8 @@ readonly class User {
             $email,
             $passwordHash,
             $username,
-            $this->registeredAt
+            $this->registeredAt,
+            $this->avatarUri
         );
     }
 }

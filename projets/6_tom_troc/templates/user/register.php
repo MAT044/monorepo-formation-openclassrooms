@@ -11,7 +11,7 @@
             <form action="/inscription" method="post" class="tt-form">
                 <div class="tt-form-row">
                     <label class="tt-form-label">Pseudo</label>
-                    <input name="pseudo" type="text" class="tt-form-input">
+                    <input name="username" type="text" class="tt-form-input">
                 </div>
                 <div class="tt-form-row">
                     <label class="tt-form-label">Adresse email</label>

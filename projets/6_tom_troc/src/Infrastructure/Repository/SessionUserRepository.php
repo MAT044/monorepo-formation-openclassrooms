@@ -26,7 +26,8 @@ class SessionUserRepository implements UserRepository
             $row['email'],
             $row['password_hash'],
             $row['username'],
-            $row['registered_at']
+            $row['registered_at'],
+            $row['avatar_uri']
         );
     }
 
@@ -41,7 +42,8 @@ class SessionUserRepository implements UserRepository
                     $row['email'],
                     $row['password_hash'],
                     $row['username'],
-                    $row['registered_at']
+                    $row['registered_at'],
+                    $row['avatar_uri']
                 );
             }
         }
@@ -60,7 +62,8 @@ class SessionUserRepository implements UserRepository
             'email' => $user->email,
             'password_hash' => $user->passwordHash,
             'username' => $user->username,
-            'registered_at' => $user->registeredAt
+            'registered_at' => $user->registeredAt,
+            'avatar_uri' => $user->avatarUri
         ];
 
         return $user;
@@ -75,7 +78,8 @@ class SessionUserRepository implements UserRepository
             'email' => $user->email,
             'password_hash' => $user->passwordHash,
             'username' => $user->username,
-            'registered_at' => $user->registeredAt
+            'registered_at' => $user->registeredAt,
+            'avatar_uri' => $user->avatarUri
         ];
 
         return $user;

@@ -8,6 +8,7 @@ use TomTroc\Core\Http\Method;
 use TomTroc\Core\Http\Request;
 use TomTroc\Core\Http\Response;
 use TomTroc\Model\Entity\User;
+use TomTroc\Model\Repository\BookRepository;
 use TomTroc\Model\Repository\UserRepository;
 use TomTroc\View\User\AccountView;
 use TomTroc\View\User\LoginView;
@@ -16,7 +17,8 @@ use TomTroc\View\User\RegisterView;
 class UserController extends AbstractController
 {
     public function __construct(
-        private readonly UserRepository $userRepository
+        private readonly UserRepository $userRepository,
+        private readonly BookRepository $bookRepository
     ) {
     }
 
@@ -29,7 +31,7 @@ class UserController extends AbstractController
         $errors = [];
 
         if($isSend) {
-            $username = trim($request->get('pseudo', null));
+            $username = trim($request->get('username', null));
             $email = trim($request->get('email', null));
             $password = $request->get('password', null);
 
@@ -69,7 +71,9 @@ class UserController extends AbstractController
             }
         }
 
-        return $this->view(AccountView::class, ['user' => $user, 'errors' => $errors]);
+        $books = $this->bookRepository->findByUser($user->id);
+
+        return $this->view(AccountView::class, ['user' => $user, 'books' => $books, 'errors' => $errors]);
     }
 
     public function login(Request $request): Response
@@ -104,7 +108,7 @@ class UserController extends AbstractController
         $errors = [];
 
         if($isSend) {
-            $username = trim($request->get('pseudo', null));
+            $username = trim($request->get('username', null));
             $email = trim($request->get('email', null));
             $password = $request->get('password', null);
 
@@ -138,7 +142,8 @@ class UserController extends AbstractController
                     $email,
                     password_hash($password, PASSWORD_DEFAULT),
                     $username,
-                    new DateTimeImmutable('now')
+                    new DateTimeImmutable('now'),
+                    null
                 );
                 
                 $this->userRepository->create($user);
