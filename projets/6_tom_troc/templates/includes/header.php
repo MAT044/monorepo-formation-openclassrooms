@@ -6,10 +6,10 @@
             <div class="tt-menu">
                 <ul class="tt-menu-section">
                     <li>
-                        <a href="#" class="tt-menu-item">Accueil</a>
+                        <a href="/" class="tt-menu-item">Accueil</a>
                     </li>
                     <li>
-                        <a href="#" class="tt-menu-item">Nos livres </a>
+                        <a href="/livres" class="tt-menu-item">Nos livres </a>
                     </li>
                 </ul>
                 <ul class="tt-menu-section">

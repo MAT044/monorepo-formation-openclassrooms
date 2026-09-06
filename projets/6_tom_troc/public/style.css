@@ -165,14 +165,25 @@ img {
     display: flex;
     gap: 2rem;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
-.tt-row>.tt-col {
+.tt-row>* {
     flex: 1;
 }
 
 .tt-col {
     max-width: 400px;
+}
+
+.tt-col-100 {
+    flex: auto;
+    max-width: 100%;
+}
+
+.tt-col-50 {
+    flex: auto;
+    max-width: 50%;
 }
 
 
@@ -251,6 +262,34 @@ img {
 .tt-signature span {
     flex: 1;
 }
+
+.tt-panel, .tt-panel-white {
+    padding: 2rem 5rem;
+    border-radius: 20px;
+}
+
+.tt-panel-white {
+    background-color: var(--background-white-color);
+}
+
+/**
+  * Table
+  */
+
+.tt-table {
+    width: 100%;
+    border-radius: 20px;
+    background-color: var(--background-white-color);
+    border-radius: 20px;
+}
+
+.tt-table td, .tt-table th {
+    padding: 1rem 2rem;
+}
+
+.tt-table tr:nth-child(even) {
+    background-color: var(--background-secondary-color);
+ }
 
 /**
  * Typo

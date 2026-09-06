@@ -1,5 +1,6 @@
 <?php
 
+use TomTroc\Controller\BookController;
 use TomTroc\Controller\HomeController;
 use TomTroc\Controller\UserController;
 use TomTroc\Core\Router\Router;
@@ -9,4 +10,8 @@ return function(Router $router) {
     $router->all('app_user_login', '/connexion', [UserController::class, 'login']);
     $router->all('app_user_register', '/inscription', [UserController::class, 'register']);
     $router->all('app_user_account', '/mon-compte', [UserController::class, 'account']);
+    $router->get('app_books_list', '/livres', [BookController::class, 'list']);
+    $router->get('app_books_show', '/livres/{id}', [BookController::class, 'show']);
+    $router->all('app_books_new', '/mes-livres/nouveau', [BookController::class, 'form']);
+    $router->all('app_books_edit', '/mes-livres/{id}/modifier', [BookController::class, 'form']);
 };
