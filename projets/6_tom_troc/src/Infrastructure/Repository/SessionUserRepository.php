@@ -10,7 +10,15 @@ class SessionUserRepository implements UserRepository
 {
     public function __construct()
     {
-        $_SESSION['USER_TABLE'] ??= ['ROWS' => [], 'AUTO_INCREMENT' => 0];
+        $_SESSION['USER_TABLE'] ??= ['ROWS' => [], 'AUTO_INCREMENT' => 1];
+
+        if ($_SESSION['USER_TABLE']['ROWS'] === []) {
+            $passwordHash = password_hash('test', PASSWORD_DEFAULT);
+
+            $this->create(new User(null, 'test@example.com', $passwordHash, 'test', new DateTimeImmutable('2026-01-01'), null));
+            $this->create(new User(null, 'test2@example.com', $passwordHash, 'test2', new DateTimeImmutable('2026-01-02'), null));
+            $this->create(new User(null, 'test3@example.com', $passwordHash, 'test3', new DateTimeImmutable('2026-01-03'), null));
+        }
     }
 
     public function find(int $id): ?User
