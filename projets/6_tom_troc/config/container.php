@@ -1,14 +1,17 @@
 <?php
 
 use TomTroc\Controller\BookController;
+use TomTroc\Controller\MessageController;
 use TomTroc\Controller\UserController;
 use TomTroc\Core\DependencyContainer\DependencyContainer;
 use TomTroc\Core\Router\Router;
 use TomTroc\Core\Router\RouterFactory;
 use TomTroc\Core\TemplateEngine\TemplateEngine;
 use TomTroc\Infrastructure\Repository\SessionBookRepository;
+use TomTroc\Infrastructure\Repository\SessionMessageRepository;
 use TomTroc\Infrastructure\Repository\SessionUserRepository;
 use TomTroc\Model\Repository\BookRepository;
+use TomTroc\Model\Repository\MessageRepository;
 use TomTroc\Model\Repository\UserRepository;
 
 return [
@@ -24,4 +27,9 @@ return [
                 $container->resolve(UserRepository::class)
         ),
         BookRepository::class => fn(DependencyContainer $container) => $container->resolve(SessionBookRepository::class),
+        MessageController::class => fn(DependencyContainer $container) => new MessageController(
+                $container->resolve(MessageRepository::class),
+                $container->resolve(UserRepository::class)
+        ),
+        MessageRepository::class => fn(DependencyContainer $container) => $container->resolve(SessionMessageRepository::class),
 ];

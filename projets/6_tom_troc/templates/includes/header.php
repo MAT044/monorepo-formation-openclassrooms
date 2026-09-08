@@ -13,7 +13,7 @@
                     </li>
                 </ul>
                 <ul class="tt-menu-section">
-                    <li><a href="#" class="tt-menu-item">Messagerie</a></li>
+                    <li><a href="/conversations" class="tt-menu-item">Messagerie</a></li>
                     <li><a href="/mon-compte" class="tt-menu-item">Mon compte</a></li>
                     <li><a href="/connexion" class="tt-menu-item">Connexion</a></li>
                 </ul>

@@ -2,6 +2,7 @@
 
 use TomTroc\Controller\BookController;
 use TomTroc\Controller\HomeController;
+use TomTroc\Controller\MessageController;
 use TomTroc\Controller\UserController;
 use TomTroc\Core\Router\Router;
 
@@ -14,4 +15,6 @@ return function(Router $router) {
     $router->get('app_books_show', '/livres/{id}', [BookController::class, 'show']);
     $router->all('app_books_new', '/mes-livres/nouveau', [BookController::class, 'form']);
     $router->all('app_books_edit', '/mes-livres/{id}/modifier', [BookController::class, 'form']);
+    $router->get('app_conversation_list', '/conversations', [MessageController::class, 'messager']);
+    $router->all('app_conversation_detail', '/conversations/{id}', [MessageController::class, 'messager']);
 };
