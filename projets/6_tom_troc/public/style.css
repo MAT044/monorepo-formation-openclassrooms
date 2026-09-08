@@ -61,6 +61,8 @@ img {
 
 .tt-img-cover {
 	object-fit: cover;
+	align-self: stretch;
+	place-self: stretch;
 }
 
 .tt-illustration {
@@ -159,7 +161,16 @@ img {
 	width: 100%;
 	max-width: 1440px;
 	padding: 0px 2rem;
-	margin: none auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.tt-container-cards  {
+	width: 100%;
+	max-width: calc(800px + 10rem);
+	padding: 0px 2rem;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .tt-row {
@@ -232,6 +243,7 @@ img {
 	border-radius: 10px;
 
 	text-decoration: none;
+	text-align: center;
 
 	font-weight: 600;
 	transition: background-color 0.2s, color 0.2s, border 0.2s;
@@ -264,11 +276,21 @@ img {
 	display: flex;
 	flex-direction: column;
 	text-decoration: none;
+	justify-self: center;
 }
 
-.tt-book-car>img {
+.tt-book-card {
+	background-color: var(--background-white-color);
+}
+
+.tt-book-card>img {
 	width: 200px;
 	height: 200px;
+	border: none;
+}
+
+.tt-book-card > .tt-card-body {
+	padding: 0rem 1rem;
 }
 
 .tt-card-conversation {
@@ -290,6 +312,27 @@ img {
 	font-size: 14px;
 }
 
+.tt-book-card  .tt-card-title {
+	font-size: 16px;
+	font-weight: 400;
+	margin-bottom: 0;
+}
+
+.tt-book-card  .tt-card-subtitle {
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--text-secondary-color);
+}
+
+.tt-book-card  .tt-card-footnote {
+	font-size: 10px;
+	font-weight: 400;
+	font-style: italic;
+	color: var(--text-secondary-color);
+	margin: 2rem 0;
+}
+
+
 .tt-card-text {
 	font-size: 12px;
 	color: var(--text-secondary-color);
@@ -306,6 +349,23 @@ img {
 	background-color: var(--background-white-color);
 	border-radius: 10px;
 	font-size: 14px;
+}
+
+.tt-pill {
+	display: inline-flex;
+	gap: 0.5rem;
+	background-color: var(--background-white-color);
+	border-radius: 999px;
+	padding: 0.5rem;
+	text-decoration: none;
+	min-width: 150px;
+	font-size: 14pxs;
+}
+
+.tt-pill-body {
+	text-align: center;
+	align-self: center;
+	flex: 1;
 }
 
 .tt-signature {
@@ -535,4 +595,34 @@ img {
 	display: flex;
 	flex-direction: column;
 	justify-content: end;
+}
+
+/**
+ * Book
+ */
+
+ .tt-book-info {
+	width: 100%;
+	max-width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0rem 1rem;
+ }
+
+ .tt-book-info h1 {
+	font-size: 48px;
+	margin-top: 5rem;
+	margin-bottom: 0rem;
+ }
+
+ .tt-text-separator {
+	max-width: 27px;
+	color: var(--text-secondary-color);
+	margin: 3rem 0;
+}
+
+.tt-description-title {
+	font-size: 8px;
+	font-weight: 600;
+	font-family: "Inter", sans-serif;
 }
