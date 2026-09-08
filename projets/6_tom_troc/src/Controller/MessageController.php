@@ -21,6 +21,8 @@ class MessageController extends AbstractController
 
     public function messager(Request $request)
     {
+        $this->checkIfUserIsConnected();
+        
         $targetId = $request->get('id', null);
 
         $currentUser = $this->userRepository->find($_SESSION['logged_user_id']);

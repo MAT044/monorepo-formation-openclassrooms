@@ -24,6 +24,7 @@ class UserController extends AbstractController
 
     public function account(Request $request): Response
     {
+        $this->checkIfUserIsConnected();
         $user = $this->userRepository->find($_SESSION['logged_user_id']);
 
         $isSend = ($request->method === Method::POST);

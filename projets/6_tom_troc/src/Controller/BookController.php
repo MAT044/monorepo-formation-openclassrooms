@@ -37,7 +37,8 @@ class BookController extends AbstractController {
     }
 
     public function form(Request $request) {
-
+        $this->checkIfUserIsConnected();
+        
         $id = $request->get('id', null);
 
         $book = isset($id) ? $this->bookRepository->find($id) : null;

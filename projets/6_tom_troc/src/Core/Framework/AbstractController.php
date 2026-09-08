@@ -19,4 +19,19 @@ abstract class AbstractController implements ContainerAwareInterface
     {
         return new Response(302, 'Redirect to ' . $path, ['Location: ' . $path]);
     }
+
+    protected function checkIfUserIsConnected(?int $userId = null): void
+    {
+        $loggedUserId = $_SESSION['logged_user_id'] ?? null;
+
+        if ($userId !== null && $loggedUserId !== $userId) {
+            throw new UnauthorizedException();
+        }
+
+        if ($loggedUserId === null) {
+            throw new UnauthorizedException();
+        }
+    }
+
+
 }

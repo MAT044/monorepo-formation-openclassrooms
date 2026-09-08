@@ -5,6 +5,7 @@ namespace TomTroc\Core\Router;
 use Closure;
 use Throwable;
 use TomTroc\Core\DependencyContainer\DependencyContainer;
+use TomTroc\Core\Framework\UnauthorizedException;
 use TomTroc\Core\Http\Method;
 use TomTroc\Core\Http\Request;
 use TomTroc\Core\Http\Response;
@@ -47,6 +48,8 @@ class Router
             $response = ($route->controller)($request);
         } catch (RouteNotFound) {
             $response = new Response(404, '404 - Not found');
+        } catch (UnauthorizedException $e) {
+            $response = new Response(301, 'Redirect to /connexion', ['Location: /connexion']);
         } catch (Throwable $e) {
             $response = new Response(500, '500 - Unexpected error : ' . $e->getMessage());
         }
