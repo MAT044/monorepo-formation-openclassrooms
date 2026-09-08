@@ -1,6 +1,7 @@
 <?php
 
 use TomTroc\Controller\BookController;
+use TomTroc\Controller\HomeController;
 use TomTroc\Controller\MessageController;
 use TomTroc\Controller\UserController;
 use TomTroc\Core\DependencyContainer\DependencyContainer;
@@ -17,6 +18,9 @@ use TomTroc\Model\Repository\UserRepository;
 return [
         Router::class => fn(DependencyContainer $container) => RouterFactory::fromConfigPath(__DIR__ . '/routes.php')->create($container),
         TemplateEngine::class => fn() => new TemplateEngine(dirname(__DIR__) . '/templates/'),
+        HomeController::class => fn(DependencyContainer $container) => new HomeController(
+                $container->resolve(BookRepository::class)
+        ),
         UserController::class => fn(DependencyContainer $container) => new UserController(
                 $container->resolve(UserRepository::class),
                 $container->resolve(BookRepository::class)

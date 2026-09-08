@@ -5,7 +5,7 @@
                 <h1>Rejoignez nos lecteurs passionnés </h1>
                 <p>Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux de la lecture. Nous
                     croyons en la magie du partage de connaissances et d'histoires à travers les livres. </p>
-                <a href="#" class="tt-cta">Découvrir</a>
+                <a href="/livres" class="tt-cta">Découvrir</a>
             </div>
             <div class="tt-col">
                 <img src="/assets/img/4b930792e67398fca2185c7e020225c880309454.jpg" alt="Hamza" width="404px"
@@ -14,13 +14,23 @@
         </div>
     </div>
 </section>
-<section class="tt-section tt-text-center">
-    <div class="tt-container">
-        <h2>Les derniers livres ajoutés</h2>
+<section class="tt-section ">
+    <div class="tt-container-cards">
+        <h2 class="tt-text-center">Les derniers livres ajoutés</h2>
         <div class="tt-cards-grid">
-
+            <?php foreach ($books ?? [] as $book): ?>
+                <a href="/livres/<?= $book->id ?>" class="tt-card tt-book-card">
+                    <img class="tt-card-img">
+                    <div class="tt-card-body">
+                        <h5 class="tt-card-title"><?= $book->title ?></h5>
+                        <p class="tt-card-subtitle"><?= $book->author ?></p>
+                        <p class="tt-card-footnote">Vendu par : <?= $book->author ?></p>
+                    </div>
+                </a>
+            <?php endforeach; ?>
         </div>
-        <a href="#" class="tt-cta">Voir tous les livres</a>
+        <div class="tt-text-center">
+        <a href="/livres" class="tt-cta">Voir tous les livres</a></div>
     </div>
 </section>
 <section class="tt-section-highlight tt-text-center">
@@ -55,7 +65,7 @@
                 </p>
             </div>
         </div>
-        <a href="#" class="tt-cta-outline">Voir tous les livres</a>
+        <a href="/livres" class="tt-cta-outline">Voir tous les livres</a>
     </div>
 </section>
 <div class="tt-section-illustration">

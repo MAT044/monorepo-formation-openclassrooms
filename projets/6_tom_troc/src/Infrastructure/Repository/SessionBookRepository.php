@@ -86,6 +86,39 @@ class SessionBookRepository implements BookRepository
         return $result;
     }
 
+    public function findLastest(int $max): array
+    {
+        $rows = $_SESSION['BOOK_TABLE']['ROWS'];
+        usort(
+            $rows,
+            fn (array $left, array $right) => $right['created_at'] <=> $left['created_at']
+        );
+
+        $result = [];
+        $count = 0;
+
+        foreach ($rows as $row) {
+            if ($count >= $max) {
+                break;
+            }
+
+            $result[] = new Book(
+                $row['id'],
+                $row['title'],
+                $row['author'],
+                $row['description'],
+                $row['available'],
+                $row['created_at'],
+                $row['owner_id'],
+                $row['illustration_uri']
+            );
+
+            $count++;
+        }
+
+        return $result;
+    }
+
     public function create(Book $book): Book
     {
         $id = $_SESSION['BOOK_TABLE']['AUTO_INCREMENT']++;
