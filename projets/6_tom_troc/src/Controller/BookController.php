@@ -25,15 +25,14 @@ class BookController extends AbstractController {
 
     public function list(Request $request) {
         $search = $request->get('search', '');
-        $books = $this->bookRepository->findBySearch($search, true);
+        $books = $this->bookRepository->findBySearch($search);
         return $this->view(BookListView::class, ['books' => $books]);
     }
 
     public function show(Request $request) {
         $id = $request->get('id', null);
         $book = $this->bookRepository->find($id);
-		$owner = $this->userRepository->find($book->ownerId);
-        return $this->view(BookInfoView::class, ['book' => $book, 'owner' => $owner]);
+        return $this->view(BookInfoView::class, ['book' => $book, 'owner' => $book->owner]);
     }
 
     public function form(Request $request) {
@@ -56,7 +55,7 @@ class BookController extends AbstractController {
             $author = trim($request->get('author', null));
             $description = $request->get('description', null);
 			$available = $request->get('available', null);
-			$ownerId = $_SESSION['logged_user_id'];
+			$owner = $this->userRepository->find((int) $_SESSION['logged_user_id']);
 
             if(count($errors) === 0) {
 
@@ -72,7 +71,7 @@ class BookController extends AbstractController {
 					$description,
 					$available,
 					new DateTimeImmutable('now'),
-					$ownerId,
+					$owner,
 					null
 				);
 
@@ -83,5 +82,85 @@ class BookController extends AbstractController {
         }
 
         return $this->view(BookFormView::class, ['book' => $book, 'errors' => $errors]);
+    }
+
+    public function illustration(Request $request) {
+        $this->checkIfUserIsConnected();
+
+        $id = $request->get('id', null);
+        $book = $this->bookRepository->find((int) $id);
+
+        if ($book === null) {
+            return $this->redirect('/mon-compte?error=book_not_found');
+        }
+
+        if ($book->owner->id !== (int) $_SESSION['logged_user_id']) {
+            return $this->redirect('/mon-compte?error=forbidden');
+        }
+
+        $file = $request->file('illustration_file');
+
+        if (!is_array($file) || !isset($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])) {
+            return $this->redirect('/mes-livres/' . $book->id . '/modifier?error=illustration_invalide');
+        }
+
+        $mime = mime_content_type($file['tmp_name']);
+        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+
+        if (!in_array($mime, $allowedMimeTypes, true)) {
+            return $this->redirect('/mes-livres/' . $book->id . '/modifier?error=illustration_format');
+        }
+
+        if ($file['size'] > 2 * 1024 * 1024) {
+            return $this->redirect('/mes-livres/' . $book->id . '/modifier?error=illustration_taille');
+        }
+
+        $extensionMap = [
+            'image/jpeg' => 'jpg',
+            'image/png' => 'png',
+            'image/webp' => 'webp',
+            'image/gif' => 'gif',
+        ];
+
+        $extension = $extensionMap[$mime];
+        $safeTitle = preg_replace('/[^A-Za-z0-9_-]+/', '_', $book->title);
+        $safeTitle = trim($safeTitle, '_');
+
+        if ($safeTitle === '') {
+            $safeTitle = 'book';
+        }
+
+        $uploadDirectory = dirname(__DIR__, 2) . '/public/upload/book';
+
+        if (!is_dir($uploadDirectory) && !mkdir($uploadDirectory, 0777, true) && !is_dir($uploadDirectory)) {
+            return $this->redirect('/mes-livres/' . $book->id . '/modifier?error=illustration_upload');
+        }
+
+        $filename = sprintf('%d_%s_%s.%s', $book->id, $safeTitle, uniqid('', true), $extension);
+        $destination = $uploadDirectory . '/' . $filename;
+
+        if (!move_uploaded_file($file['tmp_name'], $destination)) {
+            return $this->redirect('/mes-livres/' . $book->id . '/modifier?error=illustration_upload');
+        }
+
+        $this->bookRepository->update($book->updateIllustration('/upload/book/' . $filename));
+
+        return $this->redirect('/mes-livres/' . $book->id . '/modifier');
+    }
+
+    public function delete(Request $request) {
+        $id = $request->get('id', null);
+
+        $book = $this->bookRepository->find($id ?? 0);
+
+        if(!$book) {
+            return $this->redirect('/mon-compte');
+        }
+
+        $this->checkIfUserIsConnected($book->owner->id);
+
+        $this->bookRepository->delete($id);
+
+        return $this->redirect('/mon-compte');
     }
 }

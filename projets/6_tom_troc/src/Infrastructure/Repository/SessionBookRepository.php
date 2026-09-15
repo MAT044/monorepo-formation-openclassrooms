@@ -4,6 +4,7 @@ namespace TomTroc\Infrastructure\Repository;
 
 use DateTimeImmutable;
 use TomTroc\Model\Entity\Book;
+use TomTroc\Model\Entity\User;
 use TomTroc\Model\Repository\BookRepository;
 
 class SessionBookRepository implements BookRepository
@@ -13,10 +14,10 @@ class SessionBookRepository implements BookRepository
         $_SESSION['BOOK_TABLE'] ??= ['ROWS' => [], 'AUTO_INCREMENT' => 1];
 
         if ($_SESSION['BOOK_TABLE']['ROWS'] === []) {
-            $this->create(new Book(null, 'Le Petit Prince', 'Antoine de Saint-Exupéry', 'Un classique à redécouvrir.', true, new DateTimeImmutable('2026-01-10'), 1, null));
-            $this->create(new Book(null, 'L\'Étranger', 'Albert Camus', 'Un roman sur l\'étrangeté au monde.', true, new DateTimeImmutable('2026-01-11'), 1, null));
-            $this->create(new Book(null, 'La Horde du Contrevent', 'Alain Damasio', 'Une expédition portée par le vent.', false, new DateTimeImmutable('2026-01-12'), 2, null));
-            $this->create(new Book(null, 'Fondation', 'Isaac Asimov', 'Le début d\'une grande saga de science-fiction.', true, new DateTimeImmutable('2026-01-13'), 3, null));
+            $this->create(new Book(null, 'Le Petit Prince', 'Antoine de Saint-Exupéry', 'Un classique à redécouvrir.', true, new DateTimeImmutable('2026-01-10'), $this->hydrateOwner(1), null));
+            $this->create(new Book(null, 'L\'Étranger', 'Albert Camus', 'Un roman sur l\'étrangeté au monde.', true, new DateTimeImmutable('2026-01-11'), $this->hydrateOwner(1), null));
+            $this->create(new Book(null, 'La Horde du Contrevent', 'Alain Damasio', 'Une expédition portée par le vent.', false, new DateTimeImmutable('2026-01-12'), $this->hydrateOwner(2), null));
+            $this->create(new Book(null, 'Fondation', 'Isaac Asimov', 'Le début d\'une grande saga de science-fiction.', true, new DateTimeImmutable('2026-01-13'), $this->hydrateOwner(3), null));
         }
     }
 
@@ -35,18 +36,18 @@ class SessionBookRepository implements BookRepository
             $row['description'],
             $row['available'],
             $row['created_at'],
-            $row['owner_id'],
+            $this->hydrateOwner((int) $row['owner_id']),
             $row['illustration_uri']
         );
     }
 
-    public function findBySearch(string $title, bool $available): array
+    public function findBySearch(string $title): array
     {
         $rows = $_SESSION['BOOK_TABLE']['ROWS'];
         $result = [];
 
         foreach ($rows as $row) {
-            if (stripos($row['title'], $title) !== false && $row['available'] === $available) {
+            if (stripos($row['title'], $title) !== false) {
                 $result[] = new Book(
                     $row['id'],
                     $row['title'],
@@ -54,8 +55,8 @@ class SessionBookRepository implements BookRepository
                     $row['description'],
                     $row['available'],
                     $row['created_at'],
-                    $row['owner_id'],
-            $row['illustration_uri']
+                    $this->hydrateOwner((int) $row['owner_id']),
+                    $row['illustration_uri']
                 );
             }
         }
@@ -69,7 +70,7 @@ class SessionBookRepository implements BookRepository
         $result = [];
 
         foreach ($rows as $row) {
-            if ($row['owner_id'] === $userId) {
+            if ((int) $row['owner_id'] === $userId) {
                 $result[] = new Book(
                     $row['id'],
                     $row['title'],
@@ -77,8 +78,8 @@ class SessionBookRepository implements BookRepository
                     $row['description'],
                     $row['available'],
                     $row['created_at'],
-                    $row['owner_id'],
-            $row['illustration_uri']
+                    $this->hydrateOwner((int) $row['owner_id']),
+                    $row['illustration_uri']
                 );
             }
         }
@@ -109,7 +110,7 @@ class SessionBookRepository implements BookRepository
                 $row['description'],
                 $row['available'],
                 $row['created_at'],
-                $row['owner_id'],
+                $this->hydrateOwner((int) $row['owner_id']),
                 $row['illustration_uri']
             );
 
@@ -122,7 +123,6 @@ class SessionBookRepository implements BookRepository
     public function create(Book $book): Book
     {
         $id = $_SESSION['BOOK_TABLE']['AUTO_INCREMENT']++;
-
         $book = $book->withId($id);
 
         $_SESSION['BOOK_TABLE']['ROWS'][$id] = [
@@ -132,8 +132,8 @@ class SessionBookRepository implements BookRepository
             'description' => $book->description,
             'available' => $book->available,
             'created_at' => $book->createdAt,
-            'owner_id' => $book->ownerId,
-            'illustration_uri' => $book->illustrationUri
+            'owner_id' => $book->owner->id,
+            'illustration_uri' => $book->illustrationUri,
         ];
 
         return $book;
@@ -150,11 +150,36 @@ class SessionBookRepository implements BookRepository
             'description' => $book->description,
             'available' => $book->available,
             'created_at' => $book->createdAt,
-            'owner_id' => $book->ownerId,
-            'illustration_uri' => $book->illustrationUri
+            'owner_id' => $book->owner->id,
+            'illustration_uri' => $book->illustrationUri,
         ];
 
         return $book;
+    }
+
+    private function hydrateOwner(int $id): User
+    {
+        $row = $_SESSION['USER_TABLE']['ROWS'][$id] ?? null;
+
+        if ($row === null) {
+            return new User(
+                $id,
+                'unknown@example.com',
+                '',
+                'unknown',
+                new DateTimeImmutable('now'),
+                null
+            );
+        }
+
+        return new User(
+            $row['id'],
+            $row['email'],
+            $row['password_hash'],
+            $row['username'],
+            $row['registered_at'],
+            $row['avatar_uri']
+        );
     }
 
     public function upsert(Book $book): Book

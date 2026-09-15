@@ -12,7 +12,7 @@ readonly class Book {
         public string $description,
         public bool $available,
         public DateTimeImmutable $createdAt,
-        public int $ownerId,
+        public User $owner,
         public ?string $illustrationUri,
     )
     {}
@@ -25,7 +25,7 @@ readonly class Book {
             $this->description,
             $this->available,
             $this->createdAt,
-            $this->ownerId,
+            $this->owner,
             $this->illustrationUri
         );
     }
@@ -43,8 +43,22 @@ readonly class Book {
             $description,
             $available,
             $this->createdAt,
-            $this->ownerId,
+            $this->owner,
             $this->illustrationUri
+        );
+    }
+
+    public function updateIllustration(string $uri): self
+    {
+        return new Book(
+            $this->id,
+            $this->title,
+            $this->author,
+            $this->description,
+            $this->available,
+            $this->createdAt,
+            $this->owner,
+            $uri
         );
     }
 }
