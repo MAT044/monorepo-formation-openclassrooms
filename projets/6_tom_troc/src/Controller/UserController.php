@@ -13,6 +13,7 @@ use TomTroc\Model\Repository\UserRepository;
 use TomTroc\View\User\AccountView;
 use TomTroc\View\User\LoginView;
 use TomTroc\View\User\RegisterView;
+use TomTroc\View\User\UserInfoView;
 
 class UserController extends AbstractController
 {
@@ -75,6 +76,75 @@ class UserController extends AbstractController
         $books = $this->bookRepository->findByUser($user->id);
 
         return $this->view(AccountView::class, ['user' => $user, 'books' => $books, 'errors' => $errors]);
+    }
+
+    public function avatar(Request $request): Response
+    {
+        $this->checkIfUserIsConnected();
+        $user = $this->userRepository->find($_SESSION['logged_user_id']);
+
+        $file = $request->file('avatar_file');
+
+        if (!is_array($file) || !isset($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])) {
+            return $this->redirect('/mon-compte?error=avatar_invalide');
+        }
+
+        $mime = mime_content_type($file['tmp_name']);
+        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+
+        if (!in_array($mime, $allowedMimeTypes, true)) {
+            return $this->redirect('/mon-compte?error=avatar_format');
+        }
+
+        if ($file['size'] > 2 * 1024 * 1024) {
+            return $this->redirect('/mon-compte?error=avatar_taille');
+        }
+
+        $extensionMap = [
+            'image/jpeg' => 'jpg',
+            'image/png' => 'png',
+            'image/webp' => 'webp',
+            'image/gif' => 'gif',
+        ];
+
+        $extension = $extensionMap[$mime];
+        $safeUsername = preg_replace('/[^A-Za-z0-9_-]+/', '_', $user->username);
+        $safeUsername = trim($safeUsername, '_');
+
+        if ($safeUsername === '') {
+            $safeUsername = 'user';
+        }
+
+        $uploadDirectory = dirname(__DIR__, 2) . '/public/upload/avatar';
+
+        if (!is_dir($uploadDirectory) && !mkdir($uploadDirectory, 0777, true) && !is_dir($uploadDirectory)) {
+            return $this->redirect('/mon-compte?error=avatar_upload');
+        }
+
+        $filename = sprintf('%d_%s_%s.%s', $user->id, $safeUsername, uniqid('', true), $extension);
+        $destination = $uploadDirectory . '/' . $filename;
+
+        if (!move_uploaded_file($file['tmp_name'], $destination)) {
+            return $this->redirect('/mon-compte?error=avatar_upload');
+        }
+
+        $this->userRepository->update($user->updateAvatar('/upload/avatar/' . $filename));
+
+        return $this->redirect('/mon-compte');
+    }
+
+    public function info(Request $request): Response
+    {
+        $userId = $request->get('id', null);
+        $user = $this->userRepository->find((int) $userId);
+
+        if ($user === null) {
+            throw new \Exception('Utilisateur introuvable');
+        }
+
+        $books = $this->bookRepository->findByUser($user->id);
+
+        return $this->view(UserInfoView::class, ['user' => $user, 'books' => $books]);
     }
 
     public function login(Request $request): Response

@@ -39,4 +39,16 @@ readonly class User {
             $this->avatarUri
         );
     }
+
+    public function updateAvatar(string $uri): self
+    {
+        return new User(
+            $this->id,
+            $this->email,
+            $this->passwordHash,
+            $this->username,
+            $this->registeredAt,
+            $uri
+        );
+    }
 }

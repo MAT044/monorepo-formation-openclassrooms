@@ -13,7 +13,7 @@ class SessionUserRepository implements UserRepository
         $_SESSION['USER_TABLE'] ??= ['ROWS' => [], 'AUTO_INCREMENT' => 1];
 
         if ($_SESSION['USER_TABLE']['ROWS'] === []) {
-            $passwordHash = password_hash('test', PASSWORD_DEFAULT);
+            echo $passwordHash = password_hash('test', PASSWORD_DEFAULT);
 
             $this->create(new User(null, 'test@example.com', $passwordHash, 'test', new DateTimeImmutable('2026-01-01'), null));
             $this->create(new User(null, 'test2@example.com', $passwordHash, 'test2', new DateTimeImmutable('2026-01-02'), null));

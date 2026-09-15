@@ -13,7 +13,7 @@
 						<a href="/conversations/<?= $conversation['user']->id ?>"
 							class="tt-card-conversation tt-card tt-card-vertical <?= $backgroundClass ?>">
 							<div class="tt-center-wrapper">
-								<img src="<?= $conversation['user']->avatarUri ?>" class="tt-avatar tt-avatar-small">
+								<img src="<?= htmlspecialchars($conversation['user']->avatarUri ?? '/assets/img/default-avatar.png') ?>" alt="Avatar de <?= htmlspecialchars($conversation['user']->username) ?>" class="tt-avatar tt-avatar-small">
 							</div>
 
 							<div class="tt-card-body">
@@ -31,8 +31,8 @@
 			<div class="tt-col-conversation">
 				<?php if ($targetUser): ?>
 					<div class="">
-						<h2><img src="<?= $targetUser->avatarUri ?>"
-								class="tt-avatar tt-avatar-small">&nbsp;<?= $targetUser->username ?></h2>
+						<h2><img src="<?= htmlspecialchars($targetUser->avatarUri ?? '/assets/img/default-avatar.png') ?>"
+								alt="Avatar de <?= htmlspecialchars((string) $targetUser->username) ?>" class="tt-avatar tt-avatar-small">&nbsp;<?= htmlspecialchars((string) $targetUser->username) ?></h2>
 					</div>
 					<div class="tt-conversation-body">
 						<?php foreach ($messages as $message):
@@ -43,13 +43,13 @@
 								<div class="tt-message-header">
 									<p>
 										<?php if(!$isUserMsg): ?>
-												<img src="<?= $targetUser->avatarUri ?>" class="tt-avatar tt-avatar-xs">
+												<img src="<?= htmlspecialchars($targetUser->avatarUri ?? '/assets/img/default-avatar.png') ?>" alt="Avatar de <?= htmlspecialchars((string) $targetUser->username) ?>" class="tt-avatar tt-avatar-xs">
 										<?php endif; ?>
-										<?= $message->sendedAt->format('d.m H:i') ?>
+										<?= htmlspecialchars($message->sendedAt->format('d.m H:i')) ?>
 									</p>
 								</div>
 								<div class="tt-message-body">
-									<p><?= $message->body ?></p>
+									<p><?= htmlspecialchars((string) $message->body) ?></p>
 								</div>
 							</div>
 						<?php endforeach; ?>

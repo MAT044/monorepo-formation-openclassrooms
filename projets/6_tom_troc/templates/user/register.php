@@ -4,7 +4,7 @@
             <h1>Inscription</h1>
             <?php foreach($errors as $error): ?>
                 <div class="tt-alert tt-alert-error">
-                    <p><?= $error ?></p>
+                    <p><?= htmlspecialchars((string) $error) ?></p>
                 </div>
             <?php endforeach; ?>
 
