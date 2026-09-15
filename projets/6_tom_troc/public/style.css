@@ -5,11 +5,13 @@
 
 	--primary-color: #00AC66;
 	--primary-dark-color: #006D41;
+	--success-color: #6DC5A1;
+	--danger-color: #C56D6D;
 
 	--background-color: #FAF9F7;
 	--background-secondary-color: #F5F3EF;
 	--background-white-color: #FFFFFF;
-	--background-message-color: #EDF2F6;
+	--background-tertiary-color: #EDF2F6;
 }
 
 * {
@@ -173,6 +175,28 @@ img {
 	margin-right: auto;
 }
 
+.tt-header-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.5rem;
+	margin-bottom: 2rem;
+}
+
+.tt-header-row h1 {
+	margin: 0;
+}
+
+.tt-search-form {
+	flex: 1;
+	max-width: 360px;
+	margin-left: auto;
+}
+
+.tt-search-form .tt-form-input {
+	min-height: 48px;
+}
+
 .tt-row {
 	display: flex;
 	gap: 2rem;
@@ -256,6 +280,7 @@ img {
 
 .tt-cta-outline {
 	color: var(--primary-color);
+	background-color: var(--background-secondary-color);
 }
 
 .tt-cta:hover,
@@ -332,6 +357,36 @@ img {
 	margin: 2rem 0;
 }
 
+.tt-book-miniature {
+	display: block;
+	width: 78px;
+	height: 78px;
+	object-fit: cover;
+}
+
+.tt-book-status {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 70px;
+	padding: 0.3rem 0.5rem;
+	border-radius: 999px;
+	font-family: "Inter", sans-serif;
+	font-size: 8px;
+	font-weight: 500;
+	line-height: 1.2;
+	text-align: center;
+	text-transform: lowercase;
+	color: var(--text-white-color);
+}
+
+.tt-book-status-available {
+	background-color: var(--success-color);
+}
+
+.tt-book-status-unavailable {
+	background-color: var(--danger-color);
+}
 
 .tt-card-text {
 	font-size: 12px;
@@ -404,9 +459,166 @@ img {
 	height: 48px;
 }
 
+.tt-avatar-large {
+	width: 135px;
+	height: 135px;
+}
+
 .tt-avatar-xs {
 	width: 24px;
 	height: 24px;
+}
+
+.tt-account-profile {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	gap: 0.75rem;
+	min-height: 100%;
+	padding: 1rem 0;
+}
+
+.tt-account-profile .tt-avatar {
+	display: block;
+	margin: 0 auto;
+}
+
+.tt-account-profile .tt-account-username,
+.tt-account-profile .tt-account-member-since,
+.tt-account-profile .tt-account-library-label,
+.tt-account-profile .tt-account-library-count {
+	margin: 0;
+}
+
+.tt-account-profile .tt-account-separator {
+	width: 242px;
+	height: 1px;
+	background-color: #F5F3EF;
+	margin: 1.25rem 0 1.5rem;
+}
+
+.tt-avatar-modal {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.tt-avatar-modal-toggle {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.tt-avatar-edit-link {
+	display: inline-block;
+	font-size: 12px;
+	font-weight: 500;
+	color: var(--text-color);
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.tt-avatar-modal-panel {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	max-width: none;
+	max-height: none;
+	margin: 0;
+	padding: 0;
+	border: none;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	background: rgba(41, 41, 41, 0.35);
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity 0.2s ease, visibility 0.2s ease;
+	z-index: 1000;
+}
+
+.tt-avatar-modal-panel::backdrop {
+	background: rgba(41, 41, 41, 0.35);
+}
+
+.tt-avatar-modal-panel > * {
+	position: relative;
+	z-index: 1;
+}
+
+.tt-avatar-modal-close-form {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	margin: 0;
+}
+
+.tt-avatar-modal-close {
+	font-size: 2rem;
+	line-height: 1;
+	cursor: pointer;
+	color: var(--text-color);
+}
+
+.tt-avatar-modal-toggle:checked + .tt-avatar-edit-link + .tt-avatar-modal-panel {
+	display: flex;
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+}
+
+.tt-avatar-modal-panel .tt-form-modal {
+	width: min(480px, 90vw);
+	padding: 2rem;
+	background: var(--background-white-color);
+	border-radius: 20px;
+	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+}
+
+.tt-avatar-modal-panel h3 {
+	margin: 0 0 1.5rem;
+	font-family: "Playfair Display", serif;
+	font-size: 24px;
+	font-weight: 400;
+}
+
+.tt-account-username {
+	margin: 0;
+	font-family: "Playfair Display", serif;
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 1.2;
+}
+
+.tt-account-member-since {
+	margin: 0;
+	font-family: "Inter", sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--text-secondary-color);
+}
+
+.tt-account-library-label {
+	margin: 0;
+	font-family: "Inter", sans-serif;
+	font-size: 10px;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--text-color);
+}
+
+.tt-account-library-count {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 400;
 }
 
 /**
@@ -418,6 +630,7 @@ img {
 	border-radius: 20px;
 	background-color: var(--background-white-color);
 	border-radius: 20px;
+	border-collapse: collapse;
 }
 
 .tt-table td,
@@ -426,7 +639,7 @@ img {
 }
 
 .tt-table tr:nth-child(even) {
-	background-color: var(--background-secondary-color);
+	background-color: var(--background-tertiary-color);
 }
 
 /**
@@ -467,7 +680,7 @@ img {
 	margin-bottom: 0.5rem;
 }
 
-.tt-form-input {
+.tt-form-input, .tt-form-select {
 	padding: 1rem 0.5rem;
 	width: 100%;
 	border: 1px solid var(--text-secondary-color);
@@ -588,7 +801,7 @@ img {
 }
 
 .tt-message-user>.tt-message-body {
-	background-color: var(--background-message-color);
+	background-color: var(--background-tertiary-color);
 }
 
 .tt-conversation-body {
@@ -626,3 +839,15 @@ img {
 	font-weight: 600;
 	font-family: "Inter", sans-serif;
 }
+
+/**
+ * Utils
+ */
+
+ .tt-pt-5, .tt-py-5 {
+	padding-top: 5rem;
+ }
+
+ .tt-pb-5, .tt-py-5 {
+	padding-bottom: 5rem;
+ }
