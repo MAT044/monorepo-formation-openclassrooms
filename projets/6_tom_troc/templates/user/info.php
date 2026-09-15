@@ -22,7 +22,7 @@ if ($diff->y > 0) {
 				<h2 class="tt-account-username"><?= htmlspecialchars($user->username) ?></h2>
 				<p class="tt-account-member-since">Membre depuis <?= htmlspecialchars($memberSince) ?></p>
 				<p class="tt-account-library-label">Bibliothèque</p>
-				<p class="tt-account-library-count"><?= htmlspecialchars((string) count($books)) ?> livre<?= count($books) > 1 ? 's' : '' ?></p>
+				<p class="tt-account-library-count"><img src="/assets/icon/bok.svg"> <?= htmlspecialchars((string) count($books)) ?> livre<?= count($books) > 1 ? 's' : '' ?></p>
                 <a href="/conversations/<?= htmlspecialchars((string) $owner->id) ?>" class="tt-cta-outline">
                 Ecrire un message
             </a>

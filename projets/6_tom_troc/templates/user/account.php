@@ -42,7 +42,7 @@ if ($diff->y > 0) {
 				<h2 class="tt-account-username"><?= htmlspecialchars($user->username) ?></h2>
 				<p class="tt-account-member-since">Membre depuis <?= htmlspecialchars($memberSince) ?></p>
 				<p class="tt-account-library-label">Bibliothèque</p>
-				<p class="tt-account-library-count"><?= count($books) ?> livre<?= count($books) > 1 ? 's' : '' ?></p>
+				<p class="tt-account-library-count"><img src="/assets/icon/bok.svg"> <?= count($books) ?> livre<?= count($books) > 1 ? 's' : '' ?></p>
 			</div>
 		</div>
 		<div class="tt-panel-white tt-col-50">
