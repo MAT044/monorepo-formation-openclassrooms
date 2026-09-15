@@ -1,3 +1,14 @@
+<div class="tt-bg-secondary">
+    <div class="tt-container">
+        <nav class="tt-breadcrumb">
+            <ul>
+                <li><a href="/nos-livres">Nos livres</a></li>
+                <li><?= htmlspecialchars((string) $book->title) ?></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
 
 <div class="tt-grid">
     <img src="<?= htmlspecialchars($book->illustrationUri ?? '/assets/img/default-book.png') ?>" alt="Illustration de <?= htmlspecialchars($book->title) ?>" class="tt-img-cover">

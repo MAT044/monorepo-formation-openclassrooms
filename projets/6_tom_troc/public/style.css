@@ -851,3 +851,25 @@ img {
  .tt-pb-5, .tt-py-5 {
 	padding-bottom: 5rem;
  }
+
+ .tt-breadcrumb, .tt-breadcrumb a {
+	color: var(--text-secondary-color);
+	font-weight: 300;
+	font-size: 10px;
+	text-decoration: none;
+ }
+
+ .tt-breadcrumb ul {
+	display: flex;
+	flex-direction: row;
+	list-style: none;
+ }
+
+ .tt-breadcrumb li {
+	padding: 0.5rem 0.25rem;
+ }
+
+  .tt-breadcrumb li:not(:first-child)::before {
+	content: '>';
+	padding-right: 0.5rem;
+  }
