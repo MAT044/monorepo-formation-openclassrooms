@@ -1,0 +1,26 @@
+services:
+  database:
+    image: mariadb:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: tt-root
+      MYSQL_DATABASE: tomtroc
+      MYSQL_USER: tt-user
+      MYSQL_PASSWORD: tt-password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./var/database:/var/lib/mysql
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: database
+      PMA_USER: tt-user
+      PMA_PASSWORD: tt-password
+    ports:
+      - "8080:80"
+    depends_on:
+      - database
+
