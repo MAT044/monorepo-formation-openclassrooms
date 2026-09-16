@@ -13,9 +13,13 @@
                     </li>
                 </ul>
                 <ul class="tt-menu-section">
-                    <li><a href="/conversations" class="tt-menu-item"><img src="/assets/icon/msg.svg"> Messagerie</a></li>
-                    <li><a href="/mon-compte" class="tt-menu-item"><img src="/assets/icon/acc.svg">  Mon compte</a></li>
-                    <li><a href="/connexion" class="tt-menu-item">Connexion</a></li>
+                    <?php if($isConnected): ?>
+                        <li><a href="/conversations" class="tt-menu-item"><img src="/assets/icon/msg.svg"> Messagerie <?= ($unreadNumber > 0) ? '<span class="tt-badge">' . $unreadNumber . '</span>' : '' ?></a></li>
+                        <li><a href="/mon-compte" class="tt-menu-item"><img src="/assets/icon/acc.svg">  Mon compte</a></li>
+                        <li><a href="/deconnexion" class="tt-menu-item">Déconnexion</a></li>
+                    <?php else: ?>
+                        <li><a href="/connexion" class="tt-menu-item">Connexion</a></li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>

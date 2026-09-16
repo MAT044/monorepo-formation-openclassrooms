@@ -171,6 +171,12 @@ class UserController extends AbstractController
         return $this->view(LoginView::class, ['errors' => $errors]);
     }
 
+    public function logout(): Response
+    {
+         $_SESSION['logged_user_id'] = null;
+        return $this->redirect('/');
+    }
+
     public function register(Request $request): Response
     {
         

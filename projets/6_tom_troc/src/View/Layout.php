@@ -2,6 +2,7 @@
 
 namespace TomTroc\View;
 
+use TomTroc\Controller\LayoutController;
 use TomTroc\Core\Framework\AbstractView;
 
 abstract class Layout extends AbstractView {
@@ -33,7 +34,7 @@ abstract class Layout extends AbstractView {
 
     protected function renderHeader(array $vars = []): string
     {
-        return $this->render($this->headerTemplate, $vars);
+        return $this->render($this->headerTemplate, $this->getLayoutController()->header() ?? $vars);
     }
 
     protected function renderContent(array $vars = []): string
@@ -44,5 +45,10 @@ abstract class Layout extends AbstractView {
     protected function renderFooter(array $vars = []): string
     {
         return $this->render($this->footerTemplate, $vars);
+    }
+
+    private function getLayoutController(): LayoutController
+    {
+        return $this->getContainer()->resolve(LayoutController::class);
     }
 }

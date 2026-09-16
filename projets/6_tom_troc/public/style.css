@@ -11,6 +11,7 @@
 	--background-color: #FAF9F7;
 	--background-secondary-color: #F5F3EF;
 	--background-white-color: #FFFFFF;
+	--background-black-color: #292929;
 	--background-tertiary-color: #EDF2F6;
 }
 
@@ -872,4 +873,16 @@ img {
   .tt-breadcrumb li:not(:first-child)::before {
 	content: '>';
 	padding-right: 0.5rem;
+  }
+
+
+  .tt-badge {
+	background-color: var(--background-black-color);
+	color: var(--background-secondary-color);
+	font-size: 8px;
+	font-weight: 700;
+	padding: 5px 5px;
+	border-radius: 999px;
+	text-align: center;
+	vertical-align: middle;
   }

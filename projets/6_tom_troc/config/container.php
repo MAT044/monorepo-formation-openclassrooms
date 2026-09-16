@@ -2,6 +2,7 @@
 
 use TomTroc\Controller\BookController;
 use TomTroc\Controller\HomeController;
+use TomTroc\Controller\LayoutController;
 use TomTroc\Controller\MessageController;
 use TomTroc\Controller\UserController;
 use TomTroc\Core\DB\DB;
@@ -54,4 +55,7 @@ return [
                 $container->resolve(DB::class),
                 $container->resolve(UserRepository::class)
         ),
+        LayoutController::class => fn(DependencyContainer $container) => new LayoutController(
+                $container->resolve(MessageRepository::class)
+        )
 ];
