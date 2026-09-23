@@ -1,0 +1,8 @@
+Projet(id: int NOT NULL [PK], nom: string NOT NULL , date_debut: date NOT NULL, deadline: date, est_archive: bool)
+Employe(id: int  NOT NULL [PK], nom: string NOT NULL, prenom: string NOT NULL, mail: string NOT NULL, password_hash: string NOT NULL? niveau_acces: enum('collaborateur','chef_projet') NOT NULL, type_contrat: enum NOT NULL, date_entree: date NOT NULL)
+Projet_Employe (projet_id: int NOT NULL [PFK], employe_id: int NOT NULL [PFK])
+Statut(id: int NOT NULL [PK], nom: string NOT NULL, projet_id: int NOT NULL [FK])
+Tag(id: int NOT NULL [PK], nom: string NOT NULL, projet_id: int NOT NULL [FK])
+Tache(id: int NOT NULL [PK], titre: string NOT NULL, description: text NOT NULL, employe_id: int [FK], statut_id: int NOT NULL [FK])
+Tache_tag(tache_id: int NOT NULL [PFK], tag_id: int NOT NULL [PFK])
+Creneau(id: int NOT NULL [PK], date_debut: date NOT NULL, date_fin: date NOT NULL, employe_id: int NOT NULL [FK], tache_id: int NOT NULL [FK])
