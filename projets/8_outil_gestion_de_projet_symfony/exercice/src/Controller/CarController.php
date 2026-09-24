@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Car;
 use App\Repository\CarRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -29,5 +30,13 @@ final class CarController extends AbstractController
         return $this->render('car.html.twig', [
             'car' => $car,
         ]);
+    }
+
+    #[Route('/car/{id}/delete', name: 'app_car_delete')]
+    public function delete(Car $car, EntityManagerInterface $em): Response
+    {
+        $em->remove($car);
+        $em->flush();
+        return $this->redirect('/');
     }
 }
