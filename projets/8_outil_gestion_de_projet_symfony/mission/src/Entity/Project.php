@@ -17,7 +17,7 @@ class Project
     private ?string $title = null;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $ArchivedAt = null;
+    private ?\DateTimeImmutable $archivedAt = null;
 
     public function getId(): ?int
     {
@@ -38,12 +38,12 @@ class Project
 
     public function getArchivedAt(): ?\DateTimeImmutable
     {
-        return $this->ArchivedAt;
+        return $this->archivedAt;
     }
 
-    public function setArchivedAt(?\DateTimeImmutable $ArchivedAt): static
+    public function setArchivedAt(?\DateTimeImmutable $archivedAt): static
     {
-        $this->ArchivedAt = $ArchivedAt;
+        $this->archivedAt = $archivedAt;
 
         return $this;
     }
