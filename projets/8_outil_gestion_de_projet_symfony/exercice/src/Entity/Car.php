@@ -6,6 +6,7 @@ use App\Enum\Motor;
 use App\Repository\CarRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Positive;
 
 #[ORM\Entity(repositoryClass: CarRepository::class)]
 class Car
@@ -21,12 +22,15 @@ class Car
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
+    #[Positive()]
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $monthlyPrice = null;
 
+    #[Positive()]
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $dailyPrice = null;
 
+    #[Positive()]
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $places = null;
 
