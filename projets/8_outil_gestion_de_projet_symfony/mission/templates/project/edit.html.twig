@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Projet{% endblock %}
+
+{% block header_title %}{{project.title}}{% endblock %}
+
+{% block body %}
+    {{ include('project/_form.html.twig', {'button_label': 'Modifier'}) }}
+{% endblock %}

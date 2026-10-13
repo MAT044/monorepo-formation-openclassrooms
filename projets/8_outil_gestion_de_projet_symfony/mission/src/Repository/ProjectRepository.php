@@ -16,6 +16,16 @@ class ProjectRepository extends ServiceEntityRepository
         parent::__construct($registry, Project::class);
     }
 
+    public function findActive(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.archivedAt IS NULL')
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Project[] Returns an array of Project objects
 //     */
