@@ -5,9 +5,12 @@ namespace App\Controller;
 use App\Dto\WriteProjectDto;
 use App\Entity\Project;
 use App\Entity\ProjectMember;
+use App\Entity\Task;
+use App\Enum\TaskStatus;
 use App\Form\ProjectType;
 use App\Repository\ProjectMemberRepository;
 use App\Repository\ProjectRepository;
+use App\Repository\TaskRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -63,10 +66,19 @@ final class ProjectController extends AbstractController
     }
 
     #[Route('/project/{id}', name: 'app_project_show', methods: ['GET'])]
-    public function show(Project $project): Response
+    public function show(Project $project, ProjectMemberRepository $projectMemberRepository, TaskRepository $taskRepository): Response
     {
+        $tasks = $taskRepository->findBy(['project' => $project]);
+
+        $sortedTasks = [
+            "To Do"=> array_filter($tasks, fn(Task $task) => $task->getStatus() === TaskStatus::ToDo),
+            "Doing" => array_filter($tasks, fn(Task $task) => $task->getStatus() === TaskStatus::Doing),
+            "Done" => array_filter($tasks, fn(Task $task) => $task->getStatus() === TaskStatus::Done),
+        ];
         return $this->render('project/show.html.twig', [
             'project' => $project,
+            'members' => array_map(fn(ProjectMember $pm) => $pm->getMember(), $this->projectMemberRepository->findBy(['project' => $project])),
+            'sortedTasks' => $sortedTasks
         ]);
     }
 

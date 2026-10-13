@@ -101,42 +101,48 @@ class AppFixtures extends Fixture
                 "description" => null,
                 "date" => new DateTimeImmutable('now'),
                 "status" => TaskStatus::Done,
-                "member" => 3
+                "member" => 3,
+                "project" => 0
             ],
             [
                 "title" => "Créez votre base de données",
                 "description" => null,
                 "date" => new DateTimeImmutable('now'),
                 "status" => TaskStatus::Done,
-                "member" => 3
+                "member" => 3,
+                "project" => 0
             ],
             [
                 "title" => "Créez la page d'accueil",
                 "description" => null,
                 "date" => new DateTimeImmutable('now'),
                 "status" => TaskStatus::Doing,
-                "member" => 3
+                "member" => 3,
+                "project" => 0
             ],
             [
                 "title" => "Créez la page d'un projet",
                 "description" => null,
                 "date" => new DateTimeImmutable('now'),
                 "status" => TaskStatus::ToDo,
-                "member" => 3
+                "member" => 3,
+                "project" => 0
             ],
             [
                 "title" => "Créez la gestion des employés",
                 "description" => null,
                 "date" => new DateTimeImmutable('now'),
                 "status" => TaskStatus::ToDo,
-                "member" => 3
+                "member" => 3,
+                "project" => 0
             ],
             [
                 "title" => "Préparez votre auto-évaluation",
                 "description" => null,
                 "date" => new DateTimeImmutable('now'),
                 "status" => TaskStatus::ToDo,
-                "member" => 3
+                "member" => 3,
+                "project" => 0
             ],
         ],
     ) {
@@ -181,7 +187,8 @@ class AppFixtures extends Fixture
                 ->setDescription($data['description'])
                 ->setDate($data['date'])
                 ->setStatus($data['status'])
-                ->setMember($employees[$data['member']]);
+                ->setMember($employees[$data['member']])
+                ->setProject($projects[$data['project']]);
             $manager->persist($new);
         }
 

@@ -1,30 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Project{% endblock %}
+{% block title %}{{ project.title }}{% endblock %}
+
+{% block header %}
+<div class="flex-header">
+    <h1>{{ project.title }}</h1>
+    <div class="user-list">
+        {% for member in members %}
+            <div class="avatar">{{ member.getInitials }}</div>
+        {% endfor %}
+    </div>
+    <a class="button" href="{{ path('app_project_edit', {id: project.id}) }}">Modifier</a>
+</div>
+{% endblock %}
 
 {% block body %}
-    <h1>Project</h1>
+    <div id="content">
+        <div id="tasks-container">
+            {% for title, tasks in sortedTasks %}    
+                <div class="task-column">
+                <h2>{{ title }}</h2>
+                    {% for task in tasks %}
+                    <a class="task" href="{{ path('app_task_edit', {id: task.id}) }}">
+                        <h3>{{ task.title }}</h3>
+                        <p>{{ task.description }}</p>
+                        <div class="task-infos">
+                            {% if task.date %}
+                                <div class="task-deadline">
+                                    <i class="fa-regular fa-calendar"></i> {{ task.date|date('d/m/Y')}}
+                                </div>
+                            {% endif %}
+                            {% if task.member %}
+                                <div class="mini-user">
+                                    {{ task.member.initials}}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </a>
+                    {% endfor %}
+                    <a href="{{ path('app_task_new', {id: project.id}) }}" class="task-add">
+                    + Ajouter une tâche
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ project.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ project.title }}</td>
-            </tr>
-            <tr>
-                <th>ArchivedAt</th>
-                <td>{{ project.archivedAt ? project.archivedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_project_index') }}">back to list</a>
-
-    <a href="{{ path('app_project_edit', {'id': project.id}) }}">edit</a>
-
-    {{ include('project/_delete_form.html.twig') }}
 {% endblock %}
