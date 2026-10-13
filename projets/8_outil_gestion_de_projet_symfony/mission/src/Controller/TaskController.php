@@ -54,7 +54,7 @@ final class TaskController extends AbstractController
         ]);
     }
 
-    #[Route('/task/{id}', name: 'app_task_delete', methods: ['GET'])]
+    #[Route('/task/{id}/delete', name: 'app_task_delete', methods: ['GET'])]
     public function delete(Request $request, Task $task, EntityManagerInterface $entityManager): Response
     {
         $project = $task->getProject();

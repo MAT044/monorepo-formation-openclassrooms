@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    {{ form_row(form.lastname) }}
+    {{ form_row(form.firstname) }}
+    {{ form_row(form.email) }}
+    <div class="form-flex">
+        {{ form_row(form.entryAt) }}
+        {{ form_row(form.status) }}
+    </div>
+    {{ form_widget(form) }}
+    <button class="button button-submit">{{ button_label|default('Continuer') }}</button>
+{{ form_end(form) }}
