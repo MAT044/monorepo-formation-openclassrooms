@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Employee;
 use App\Form\EmployeeType;
 use App\Repository\EmployeeRepository;
+use App\Repository\ProjectMemberRepository;
+use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,9 +63,19 @@ final class EmployeeController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_employee_delete', methods: ['GET'])]
-    public function delete(Request $request, Employee $employee, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Employee $employee, EntityManagerInterface $entityManager, ProjectMemberRepository $projectMemberRepository, TaskRepository $taskRepository ): Response
     {
         if ($this->isCsrfTokenValid('delete'.$employee->getId(), $request->query->getString('_token'))) {
+            $projectsMember = $projectMemberRepository->findBy(['member' => $employee]);
+            foreach($projectsMember as $row) {
+                $entityManager->remove($row);
+            }
+
+            $tasks = $taskRepository->findBy(['member' => $employee]);
+            foreach($tasks as $row) {
+                $entityManager->remove($row);
+            }
+
             $entityManager->remove($employee);
             $entityManager->flush();
         }
