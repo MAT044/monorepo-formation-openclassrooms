@@ -1,3 +1,4 @@
+{% set active = active|default('none') %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,12 +28,12 @@
             <img src="/img/logo.png" alt="Logo TaskLinker" />
             </a>
             <ul id="main-menu">
-               <li class="active">
+               <li {% if active == 'project' %}class="active"{% endif %}>
                   <a href="{{ path('app_project_index') }}">
                   <i class="fa-solid fa-list-check"></i> Projets
                   </a>
                </li>
-               <li>
+               <li {% if active == 'employee' %}class="active"{% endif %}>
                   <a href="{{ path('app_employee_index') }}">
                   <i class="fa-regular fa-user"></i> Équipe
                   </a>

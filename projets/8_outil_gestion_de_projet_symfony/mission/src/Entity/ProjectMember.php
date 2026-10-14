@@ -15,7 +15,7 @@ class ProjectMember
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?project $project = null;
+    private ?Project $project = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -26,12 +26,12 @@ class ProjectMember
         return $this->id;
     }
 
-    public function getProject(): ?project
+    public function getProject(): ?Project
     {
         return $this->project;
     }
 
-    public function setProject(?project $project): static
+    public function setProject(?Project $project): static
     {
         $this->project = $project;
 

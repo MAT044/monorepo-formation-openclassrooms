@@ -2,4 +2,7 @@
     {{ form_widget(form) }}
     <br>
     <button class="button button-submit">{{ button_label|default('Continuer') }}</button>
+    {% if task %}
+        {{ include('task/_delete_form.html.twig') }}
+    {% endif %}
 {{ form_end(form) }}
