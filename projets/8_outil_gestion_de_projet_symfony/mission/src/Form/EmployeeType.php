@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Employee;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,7 +17,7 @@ class EmployeeType extends AbstractType
             ->add('lastname', null, ['label' => 'Nom'])
             ->add('email', null, ['label' => 'Email'])
             ->add('status',  null, ['label' => 'Status'])
-            ->add('entryAt', null, [
+            ->add('entryAt', DateType::class, [
                 'label' => 'Date d\'entrée',
                 'widget' => 'single_text'
             ])

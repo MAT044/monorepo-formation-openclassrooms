@@ -7,6 +7,7 @@ use App\Entity\Project;
 use App\Entity\Task;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,7 +18,7 @@ class TaskType extends AbstractType
         $builder
             ->add('title', null, ['label' => 'Titre de la tâche'])
             ->add('description')
-            ->add('date', null, [
+            ->add('date', DateType::class, [
                 'widget' => 'single_text'
             ])
             ->add('status')
