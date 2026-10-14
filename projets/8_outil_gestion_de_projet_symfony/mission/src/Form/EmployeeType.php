@@ -13,13 +13,13 @@ class EmployeeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstname', null, ['label' => 'Prénom'])
-            ->add('lastname', null, ['label' => 'Nom'])
-            ->add('email', null, ['label' => 'Email'])
-            ->add('status',  null, ['label' => 'Status'])
+            ->add('firstname', null, ['label' => 'Prénom', 'required' => false])
+            ->add('lastname', null, ['label' => 'Nom', 'required' => false])
+            ->add('email', null, ['label' => 'Email', 'required' => false])
+            ->add('status',  null, ['label' => 'Status', 'required' => false])
             ->add('entryAt', DateType::class, [
                 'label' => 'Date d\'entrée',
-                'widget' => 'single_text'
+                'widget' => 'single_text',
             ])
         ;
     }

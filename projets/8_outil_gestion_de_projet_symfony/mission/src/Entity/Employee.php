@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use App\Repository\EmployeeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 #[ORM\Entity(repositoryClass: EmployeeRepository::class)]
 class Employee
@@ -13,18 +16,24 @@ class Employee
     #[ORM\Column]
     private ?int $id = null;
 
+    #[NotNull()]
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
+    #[NotNull()]
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
+    #[NotNull()]
+    #[Email()]
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
+    #[NotNull()]
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
+    #[NotNull()]
     #[ORM\Column]
     private ?\DateTimeImmutable $entryAt = null;
 
