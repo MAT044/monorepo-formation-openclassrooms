@@ -69,7 +69,12 @@ Pour le backend servira des pages web en html+css+js.
 Pour sauvegarder les données, une base SQL sera utilisée. Grâce au bundle DoctrineORM, l'implémentation de la base (MariaDB, MySql, PostegreSql, voir Sqlite) peut-être ignorée (tant qu'aucune fonctionnalité unique à une base est utilisée), ce qui laisse plus de latitude pour le d&ploiement ou le choix de l'hébergeur.
 
 ### Diagrammes UML 
-*Des diagrammes UML détaillant l'architecture logicielle du site, y compris les diagrammes de cas d'utilisation, de classes et de séquences, pour illustrer les relations et les interactions entre les différentes composantes du système.*
+![Diagramme UML](avenir_uml.jpg)
 
 ### Modèle physique de données 
-*Un schéma décrivant la structure physique de la base de données, y compris les entités, les relations et les attributs, pour assurer une gestion efficace des données du site.*
+
+User(id: int NOT NULL [PK], firstname: string NOT NULL, lastname: string NOT NULL, email: string NOT NULL, password_hash: string NOT NULL, avatar_uri: string, tutor: User, role: enum NOT NULL)
+Workhour (id: int NOT NULL [PK], tutor_id: int NOT NULL [FK reference User], day: enum NOT NULL, start_at: hour NOT NULL, end_at: hour NOT NULL)
+Objective(id: int NOT NULL [PK], tutee_id: int NOT NULL [FK reference User], description: text NOT NULL, deadline: datetime)
+Appointement(id: int NOT NULL [PK], tutee_id: int NOT NULL [FK reference User], tutor_id: int NOT NULL [FK reference User], start_at: datetime NOT NULL, status: enum NOT NULL)
+Videocall(id: int NOT NULL [PK], tutee_id: int NOT NULL [FK reference User], tutor_id: int NOT NULL [FK reference User], started_at: datetime NOT NULL, ended_at: datetime NOT NULL)
