@@ -52,7 +52,7 @@ Les tuteurs et les tutorés doivent pouvoir participer à des visioconférences.
 
 ### Product backlog 
 
-*Le lien vers le Product Backlog mis à jour.*
+https://app.notion.com/p/9d1a742fb04c830482cf01196c08ab32?v=a63a742fb04c8232ba5408dc44fbdba6
 
 ## Aperçu de l’interface utilisateur
 *Les images et la description de l’interface réalisée par l’UX Designer et de la façon dont les fonctionnalités marcheront.*
