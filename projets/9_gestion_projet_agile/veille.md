@@ -6,7 +6,7 @@ Journal du hacker [https://www.journalduhacker.net/] - Aggrégateur
 
 ## PhP + Symfony
 
-PhP Watch [https://php.watch/] - Website
+PhP Watch [https://php.watch/] - Website - Nouvelles fonctionnalités PhP
 PhP The Right [https://phptherightway.com/] - Website - Bonnes pratiques de développement PhP
 Awesome PhP [https://github.com/ziadoz/awesome-php] - Github - A curated list of awesome PHP libraries, resources, and useful tools.
 PHPBenchLab [https://phpbenchlab.com/] - Website - Performances PhP
