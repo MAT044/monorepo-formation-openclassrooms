@@ -16,9 +16,9 @@ En tant que tuteur ou tutoré, je peux me connecter afin d'accéder à mon espac
 Taille : XS
 
 En tant que tuteur ou tutoré, je peux modifier mes informations personnelles afin de personaliser mon profil
-- Le tuteur peut modifier son email
-- Le tuteur peut modifier son avatar
-- Le tuteur peut modifier son nom
+- Le tuteur ou tutoré peut modifier son email
+- Le tuteur ou tutoré peut modifier son avatar
+- Le tuteur ou tutoré peut modifier son nom
 Taille : XS
 
 En tant que tuteur, je peux définir mes heures de travail
