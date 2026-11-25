@@ -82,7 +82,11 @@ Pour sauvegarder les données, une base SQL sera utilisée. Grâce au bundle Doc
 ### Modèle physique de données 
 
 User(id: int NOT NULL [PK], firstname: string NOT NULL, lastname: string NOT NULL, email: string NOT NULL, password_hash: string NOT NULL, avatar_uri: string, tutor_id: int [FK reference User] role: enum NOT NULL)
+
 Workhour (id: int NOT NULL [PK], tutor_id: int NOT NULL [FK reference User], day: enum NOT NULL, start_at: hour NOT NULL, end_at: hour NOT NULL)
+
 Objective(id: int NOT NULL [PK], tutee_id: int NOT NULL [FK reference User], description: text NOT NULL, deadline: datetime)
+
 Appointement(id: int NOT NULL [PK], tutee_id: int NOT NULL [FK reference User], tutor_id: int NOT NULL [FK reference User], start_at: datetime NOT NULL, status: enum NOT NULL)
+
 Videocall(id: int NOT NULL [PK], tutee_id: int NOT NULL [FK reference User], tutor_id: int NOT NULL [FK reference User], started_at: datetime NOT NULL, ended_at: datetime NOT NULL)
